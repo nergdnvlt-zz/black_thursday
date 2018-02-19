@@ -3,7 +3,7 @@ class Merchant
   attr_reader :id,
               :name
   def initialize(data)
-    @id = data.fetch(:id).to_i
-    @name = data.fetch(:name)
+    @id = data[:id].to_i
+    @name = data[:name]
   end
 end
