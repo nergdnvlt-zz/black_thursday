@@ -37,11 +37,26 @@ class MerchantRepoTest < MiniTest::Test
     assert_equal 3, result.id
   end
 
+  def test_find_by_name_returns_nil
+    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
+    result = merchant_repo.find_by_name('MountainCruisers')
+
+    assert_nil result
+  end
+
   def test_it_can_find_all_by_name
     merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
     result = merchant_repo.find_all_by_name('Ray')
 
     assert_instance_of Array, result
-    assert_equal ['GoldenRayPress', 'SunRaySites'], result
+    assert_equal %w[GoldenRayPress SunRaySites], result
+  end
+
+  def test_find_all_returns_empty_for_no_match
+    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
+    result = merchant_repo.find_all_by_name('Goblin')
+
+    assert_instance_of Array, result
+    assert_equal [], result
   end
 end
