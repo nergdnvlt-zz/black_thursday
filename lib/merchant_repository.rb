@@ -23,4 +23,19 @@ class MerchantRepository
       merchant.id == id
     end
   end
+
+  def find_by_name(name)
+    @merchants.find do |merchant|
+      merchant.name.downcase == name.downcase
+    end
+  end
+
+  def find_all_by_name(name_frag)
+    find_all = []
+    name_frag = name_frag.downcase
+    @merchants.find_all do |merchant|
+      find_all << merchant.name if merchant.name.downcase.include?(name_frag)
+    end
+    find_all
+  end
 end
