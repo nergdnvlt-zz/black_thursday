@@ -5,23 +5,22 @@ require_relative '../lib/merchant_repository'
 
 # Testing merchant repository
 class MerchantRepoTest < MiniTest::Test
-  def test_it_exists
-    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
+  def setup
+    @merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
+  end
 
-    assert_instance_of MerchantRepository, merchant_repo
+  def test_it_exists
+    assert_instance_of MerchantRepository, @merchant_repo
   end
 
   def test_it_has_merchants
-    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
-
-    assert_equal 9, merchant_repo.all.count
-    assert_instance_of Array, merchant_repo.all
-    assert_equal 'Shopin1901', merchant_repo.all.first.name
+    assert_equal 9, @merchant_repo.all.count
+    assert_instance_of Array, @merchant_repo.all
+    assert_equal 'Shopin1901', @merchant_repo.all.first.name
   end
 
   def test_it_can_find_by_id
-    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
-    result = merchant_repo.find_by_id(1)
+    result = @merchant_repo.find_by_id(1)
 
     assert_instance_of Merchant, result
     assert_equal 'Shopin1901', result.name
@@ -29,8 +28,7 @@ class MerchantRepoTest < MiniTest::Test
   end
 
   def test_it_can_find_by_name
-    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
-    result = merchant_repo.find_by_name('MiniatureBikez')
+    result = @merchant_repo.find_by_name('MiniatureBikez')
 
     assert_instance_of Merchant, result
     assert_equal 'MiniatureBikez', result.name
@@ -38,23 +36,20 @@ class MerchantRepoTest < MiniTest::Test
   end
 
   def test_find_by_name_returns_nil
-    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
-    result = merchant_repo.find_by_name('MountainCruisers')
+    result = @merchant_repo.find_by_name('MountainCruisers')
 
     assert_nil result
   end
 
   def test_it_can_find_all_by_name
-    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
-    result = merchant_repo.find_all_by_name('Ray')
+    result = @merchant_repo.find_all_by_name('Ray')
 
     assert_instance_of Array, result
-    assert_equal %w[GoldenRayPress SunRaySites], result
+    assert_equal 2, result.count
   end
 
   def test_find_all_returns_empty_for_no_match
-    merchant_repo = MerchantRepository.new('./test/fixtures/merchants.csv')
-    result = merchant_repo.find_all_by_name('Goblin')
+    result = @merchant_repo.find_all_by_name('Goblin')
 
     assert_instance_of Array, result
     assert_equal [], result
