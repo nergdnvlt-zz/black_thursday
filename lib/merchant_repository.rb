@@ -24,10 +24,10 @@ class MerchantRepository
     @merchants.find { |merchant| merchant.id == id }
   end
   # New method but Brian said to refactor into merchant
-  # def find_items_by_merchant_id(id)
-  #   items = @engine.items
-  #   items.find_all_by_merchant_id(id)
-  # end
+  def find_items_by_merchant_id(id)
+    items = @engine.items
+    items.find_all_by_merchant_id(id)
+  end
 
   def find_by_name(name)
     @merchants.find { |merchant| merchant.name.downcase == name.downcase }

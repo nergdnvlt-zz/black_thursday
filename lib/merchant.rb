@@ -9,9 +9,8 @@ class Merchant
     @merchant_repo = parent
   end
 
-# New method
   def items
-    @merchant_repo.engine.items.find_all_by_merchant_id(id)
+    @merchant_repo.find_items_by_merchant_id(id)
   end
 
   def inspect
