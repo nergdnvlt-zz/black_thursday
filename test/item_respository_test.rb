@@ -17,9 +17,9 @@ class ItemRepositoryTest < MiniTest::Test
   end
 
   def test_find_by_id_returns_item_instance_with_matching_id
-    item = @item_repo.find_by_id(263395617)
+    item = @item_repo.find_by_id(263_395_617)
 
-    assert_equal 263395617, item.id
+    assert_equal 263_395_617, item.id
     assert_instance_of Item, item
   end
 
@@ -49,6 +49,30 @@ class ItemRepositoryTest < MiniTest::Test
 
   def test_find_all_by_price_returns_empty_array_for_nil
     result = @item_repo.find_all_by_price(88.00)
+    assert_instance_of Array, result
+    assert_equal [], result
+  end
+
+  def test_it_finds_by_range
+    result = @item_repo.find_all_by_price_range(12.00..14.00)
+    assert_instance_of Array, result
+    assert_equal 1, result.count
+  end
+
+  def test_it_finds_by_range_returns_empty
+    result = @item_repo.find_all_by_price_range(1.00..4.00)
+    assert_instance_of Array, result
+    assert_equal [], result
+  end
+
+  def test_it_finds_by_merchant_id
+    result = @item_repo.find_all_by_merchant_id(123_341_85)
+    assert_instance_of Array, result
+    assert_equal 1, result.count
+  end
+
+  def test_it_finds_by_merchant_id_returns_empty_array
+    result = @item_repo.find_all_by_merchant_id(88)
     assert_instance_of Array, result
     assert_equal [], result
   end
