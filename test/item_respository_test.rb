@@ -18,11 +18,11 @@ class ItemRepositoryTest < MiniTest::Test
   def test_find_by_id_returns_item_instance_with_matching_id
    item = @item_repo.find_by_id(263395617)
 
-   assert_equal 263395617, item.find_by_id(263395617)
+   assert_equal 263395617, item.find_by_id(2633956171)
    # assert_instance_of Item, item
  end
 end
 
   # def test_find_by_id
-  #   result = @item_repo.find_by_id(263395617)
+  #   result = @item_repo.find_by_id(263395617
   # end
