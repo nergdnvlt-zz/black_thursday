@@ -1,8 +1,9 @@
 require 'CSV'
-require_relative '../lib/item'
+require_relative 'item'
 
 # Creates an item repository to hold item info
 class ItemRepository
+  attr_reader :engine
   def initialize(filepath, parent = nil)
     @items = []
     @engine = parent
@@ -15,7 +16,7 @@ class ItemRepository
 
   def populate_item(filepath)
     CSV.foreach(filepath, headers: true, header_converters: :symbol) do |data|
-      @items << Item.new(data)
+      @items << Item.new(data, self)
     end
   end
 
@@ -51,9 +52,9 @@ class ItemRepository
     end
   end
 
-  #Added method
-  def find_merchant_by_merchant_id(id)
-    @engine.find_merchant_by_merchant_id(id)
+  def find_by_merchant_id(id)
+    merchants = @engine.merchants
+    merchants.find_by_id(id)
   end
 
   def inspect

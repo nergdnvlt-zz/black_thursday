@@ -23,7 +23,7 @@ class MerchantRepository
   def find_by_id(id)
     @merchants.find { |merchant| merchant.id == id }
   end
-  # New method but Brian said to refactor into merchant
+
   def find_items_by_merchant_id(id)
     items = @engine.items
     items.find_all_by_merchant_id(id)
