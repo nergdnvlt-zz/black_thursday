@@ -1,4 +1,4 @@
-require 'csv'
+require 'CSV'
 
 module CsvParser
 

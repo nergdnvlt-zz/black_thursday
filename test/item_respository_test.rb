@@ -54,13 +54,13 @@ class ItemRepositoryTest < MiniTest::Test
   end
 
   def test_it_finds_by_range
-    result = @item_repo.find_all_by_price_range(12.00..14.00)
+    result = @item_repo.find_all_by_price_in_range(12.00..14.00)
     assert_instance_of Array, result
     assert_equal 1, result.count
   end
 
   def test_it_finds_by_range_returns_empty
-    result = @item_repo.find_all_by_price_range(1.00..4.00)
+    result = @item_repo.find_all_by_price_in_range(1.00..4.00)
     assert_instance_of Array, result
     assert_equal [], result
   end

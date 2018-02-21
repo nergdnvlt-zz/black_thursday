@@ -19,4 +19,8 @@ class SalesEngine
   def self.from_csv(data)
     new(data)
   end
+  
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
 end

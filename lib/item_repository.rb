@@ -38,7 +38,7 @@ class ItemRepository
     end
   end
 
-  def find_all_by_price_range(range)
+  def find_all_by_price_in_range(range)
     @items.find_all do |item|
       range.member?(item.unit_price)
     end
@@ -48,5 +48,9 @@ class ItemRepository
     @items.find_all do |item|
       item.merchant_id == merchant
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 end

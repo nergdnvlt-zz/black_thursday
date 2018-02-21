@@ -29,4 +29,8 @@ class Item
   # def merchant
   #   @item_repository.find_merchant_by_merchant_id(@merchant_id)
   # end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
 end

@@ -6,4 +6,8 @@ class Merchant
     @id = data[:id].to_i
     @name = data[:name]
   end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
 end
