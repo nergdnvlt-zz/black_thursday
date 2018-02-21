@@ -10,7 +10,6 @@ class SalesEngine
               :merchants
 
   def initialize(data)
-    require "pry"; binding.pry
     @item_csv = data[:items]
     @merchant_csv = data[:merchants]
     @items = ItemRepository.new(@item_csv)
@@ -18,6 +17,6 @@ class SalesEngine
   end
 
   def self.from_csv(data)
-    self.new(data)
+    new(data)
   end
 end

@@ -6,10 +6,8 @@ require_relative '../lib/sales_engine'
 # Testing merchant class
 class SalesEngineTest < MiniTest::Test
   def setup
-    @data = {
-              items: './data/items.csv',
-              merchants: './data/merchants.csv'
-            }
+    @data = { items: './data/items.csv',
+              merchants: './data/merchants.csv' }
     @sales_engine = SalesEngine.from_csv(@data)
   end
 
@@ -18,7 +16,7 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_for_from_csv_method
-    assert_equal @data[:items], SalesEngine.from_csv(@data).item_csv_path
-    assert_equal @data[:merchants], SalesEngine.from_csv(@data).merchant_csv_path
+    assert_equal @data[:items], SalesEngine.from_csv(@data).item_csv
+    assert_equal @data[:merchants], SalesEngine.from_csv(@data).merchant_csv
   end
 end
