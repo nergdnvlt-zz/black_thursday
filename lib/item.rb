@@ -9,9 +9,10 @@ class Item
               :unit_price,
               :created_at,
               :updated_at,
-              :merchant_id
+              :merchant_id,
+              :item_repo
 
-  def initialize(data)
+  def initialize(data, parent = nil)
     @id = data[:id].to_i
     @name = data[:name]
     @description = data[:description]
@@ -19,16 +20,16 @@ class Item
     @created_at = Time.parse(data[:created_at])
     @updated_at = Time.parse(data[:updated_at])
     @merchant_id = data[:merchant_id].to_i
-    # @item_repository = parent
+    @item_repo = parent
   end
 
   def unit_price_in_dollars
     @unit_price.to_f.round(2)
   end
 
-  # def merchant
-  #   @item_repository.find_merchant_by_merchant_id(@merchant_id)
-  # end
+  def merchant
+    @item_repo.find_merchant_by_merchant_id(merchant_id)
+  end
 
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"

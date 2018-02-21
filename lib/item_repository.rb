@@ -3,8 +3,9 @@ require_relative '../lib/item'
 
 # Creates an item repository to hold item info
 class ItemRepository
-  def initialize(filepath)
+  def initialize(filepath, parent = nil)
     @items = []
+    @engine = parent
     populate_item(filepath)
   end
 
@@ -48,6 +49,11 @@ class ItemRepository
     @items.find_all do |item|
       item.merchant_id == merchant
     end
+  end
+
+  #Added method
+  def find_merchant_by_merchant_id(id)
+    @engine.find_merchant_by_merchant_id(id)
   end
 
   def inspect

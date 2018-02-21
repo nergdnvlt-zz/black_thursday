@@ -12,14 +12,22 @@ class SalesEngine
   def initialize(data)
     @item_csv = data[:items]
     @merchant_csv = data[:merchants]
-    @items = ItemRepository.new(@item_csv)
-    @merchants = MerchantRepository.new(@merchant_csv)
+    @items = ItemRepository.new(@item_csv, self)
+    @merchants = MerchantRepository.new(@merchant_csv, self)
   end
 
   def self.from_csv(data)
     new(data)
   end
-  
+
+  def find_by_id(id)
+    @merchants.find_by_id(id)
+  end
+
+  def find_items_by_merchant_id(merchant_id)
+    @items.find_all_by_merchant_id(merchant_id)
+  end
+
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"
   end
