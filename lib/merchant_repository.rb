@@ -3,8 +3,10 @@ require_relative 'merchant'
 
 # Creates a merchant repository to hold merchant info
 class MerchantRepository
-  def initialize(filepath)
+  attr_reader :engine
+  def initialize(filepath, parent = nil)
     @merchants = []
+    @engine = parent
     populate_merchants(filepath)
   end
 
@@ -14,12 +16,17 @@ class MerchantRepository
 
   def populate_merchants(filepath)
     CSV.foreach(filepath, headers: true, header_converters: :symbol) do |data|
-      @merchants << Merchant.new(data)
+      @merchants << Merchant.new(data, self)
     end
   end
 
   def find_by_id(id)
     @merchants.find { |merchant| merchant.id == id }
+  end
+
+  def find_items_by_merchant_id(id)
+    items = @engine.items
+    items.find_all_by_merchant_id(id)
   end
 
   def find_by_name(name)
