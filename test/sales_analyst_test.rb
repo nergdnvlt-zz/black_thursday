@@ -9,16 +9,46 @@ class SalesAnalystTest < Minitest::Test
       items:     './data/items.csv',
       merchants: './data/merchants.csv'
     )
-    @sales_analyst = SalesAnalyst.new(@se)
+    @sa = SalesAnalyst.new(@se)
+  end
+
+  def test_it_finds_all_the_merchants
+    merchants = @sa.merchants
+    assert_equal 475, merchants.count
+  end
+
+  def test_it_finds_all_the_items
+    items = @sa.items
+    assert_equal 1367, items.count
+  end
+
+  def test_it_finds_average_items_per_merchant
+    result = @sa.average_items_per_merchant
+    assert_equal 2.88, result
+  end
+
+  def test_it_finds_the_average_items_per_merchant_stdev
+    result = @sa.average_items_per_merchant_standard_deviation
+    assert_equal 3.26, result
+  end
+
+  def test_it_merchants_with_the_highest_item_counts
+     merchants = @sa.merchants_with_high_item_count
+     assert_equal 52, merchants.count
   end
 
   def test_average_item_price_for_merchant
-    result = @sales_analyst.average_item_price_for_merchant(12334185)
+    result = @sa.average_item_price_for_merchant(123_341_85)
     assert result.is_a?(BigDecimal)
   end
 
+  def test_it_finds_golden_items
+    golden_items = @sa.golden_items
+    assert_equal 5, golden_items.count
+  end
+
   def test_average_average_item_price_for_merchant
-    result = @sales_analyst.average_average_price_per_merchant
+    result = @sa.average_average_price_per_merchant
     assert result.is_a?(BigDecimal)
   end
 end

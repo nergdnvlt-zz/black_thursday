@@ -41,7 +41,6 @@ class SalesAnalyst
   def average_item_price_for_merchant(merchant_id)
     inventory = @sales_engine.merchants.find_by_id(merchant_id).items
     prices    = inventory.map(&:unit_price)
-    # require "pry"; binding.pry
     (prices.reduce(:+) / inventory.size).round(2)
   end
 
@@ -50,5 +49,35 @@ class SalesAnalyst
       sum + average_item_price_for_merchant(merchant.id)
     end
     (total / merchants.size).round(2)
+  end
+
+  def average_item_price
+    total = items.map { |item| item.unit_price.to_i }.reduce(:+)
+    total / items.size
+  end
+
+  def deviation_of_each_item
+    items.reduce(0) do |sum|
+      sum + items.average_item_price
+    end
+  end
+
+  def golden_items
+    high_item_count = two_stdev_above_average_for_golden
+    items.find_all do |item|
+      item.unit_price > high_item_count
+    end
+  end
+
+  def average_items_price_standard_deviation
+    Math.sqrt(
+      items.reduce(0) do |sum, item|
+        sum + (item.unit_price - average_item_price)**2
+      end / (items.count - 1)
+    ).round(2)
+  end
+
+  def two_stdev_above_average_for_golden
+    average_item_price + (average_items_price_standard_deviation * 2)
   end
 end
