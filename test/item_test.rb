@@ -2,24 +2,25 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/item'
+require_relative '../lib/sales_engine'
 
 # Tests the item class
 class ItemTest < MiniTest::Test
   def setup
     @time = Time.now
     @item = Item.new({
-                       id: 263395617,
+                       id: 263_395_617,
                        name: 'Glitter scrabble frames',
                        description: 'Glitter scrabble frames Any colour glitter Any wording Available colour scrabble tiles Pink Blue Black Wooden',
                        unit_price: 1300,
                        created_at: Time.now.inspect,
                        updated_at: Time.now.inspect,
-                       merchant_id: 12334185
-                       }) # , mock('ItemRepository'))
+                       merchant_id: 123_341_85
+                     })
   end
 
   def test_it_has_an_id
-    assert_equal 263395617, @item.id
+    assert_equal 263_395_617, @item.id
   end
 
   def test_it_has_an_name
@@ -51,23 +52,22 @@ class ItemTest < MiniTest::Test
   end
 
   def test_it_has_merchant_id
-    assert_equal 12334185, @item.merchant_id
+    assert_equal 123_341_85, @item.merchant_id
   end
 
   def test_unit_price_in_dollars
     assert_equal 13.00, @item.unit_price_in_dollars
   end
 
-  # def test_it_calls_item_repository_to_return_merchant
-  #   ir = mock("item_repository")
-  #   item = Item.new({
-  #     id: 263395617,
-  #     name: "Glitter scrabble frames",
-  #     description: "Glitter scrabble frames Any colour glitter Any wording Available colour scrabble tiles Pink Blue Black Wooden",
-  #     unit_price: 1300,
-  #     created_at: Time.now.inspect,
-  #     updated_at: Time.now.inspect,
-  #     merchant_id: 12334185
-  #     }, ir)
-  # end
+  def test_if_it_returns_the_merchant_for_an_item
+    data = { items: './test/fixtures/items.csv',
+             merchants: './test/fixtures/merchants.csv' }
+    sales_engine = SalesEngine.new(data)
+    id = 263_395_721
+    item = sales_engine.items.find_by_id(id)
+
+    assert item.id == id
+    assert item.merchant.name == 'Madewithgitterxx'
+    assert item.merchant.class == Merchant
+  end
 end

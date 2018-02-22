@@ -3,6 +3,7 @@ require 'minitest/pride'
 
 require_relative '../lib/item_repository'
 
+# Tests the Item Repository
 class ItemRepositoryTest < MiniTest::Test
   def setup
     @item_repo = ItemRepository.new('./test/fixtures/items.csv')
@@ -56,11 +57,11 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_finds_by_range
     result = @item_repo.find_all_by_price_in_range(12.00..14.00)
     assert_instance_of Array, result
-    assert_equal 1, result.count
+    assert_equal 3, result.count
   end
 
   def test_it_finds_by_range_returns_empty
-    result = @item_repo.find_all_by_price_in_range(1.00..4.00)
+    result = @item_repo.find_all_by_price_in_range(1.00..2.00)
     assert_instance_of Array, result
     assert_equal [], result
   end
@@ -68,12 +69,16 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_finds_by_merchant_id
     result = @item_repo.find_all_by_merchant_id(123_341_85)
     assert_instance_of Array, result
-    assert_equal 1, result.count
+    assert_equal 3, result.count
   end
 
   def test_it_finds_by_merchant_id_returns_empty_array
     result = @item_repo.find_all_by_merchant_id(88)
     assert_instance_of Array, result
     assert_equal [], result
+  end
+
+  def test_inspect_method
+    assert_instance_of String, @item_repo.inspect
   end
 end

@@ -4,6 +4,7 @@ require_relative 'merchant'
 # Creates a merchant repository to hold merchant info
 class MerchantRepository
   attr_reader :engine
+
   def initialize(filepath, parent = nil)
     @merchants = []
     @engine = parent
