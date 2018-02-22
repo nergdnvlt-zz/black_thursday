@@ -32,7 +32,13 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 3.26, result
   end
 
-  def test_it_merchants_with_the_highest_item_counts
+  def test_one_stdev_above
+    result = @sa.one_stdev_above_average
+    expected = 6.14
+    assert_equal expected, result
+  end
+
+  def test_merchants_with_the_highest_item_counts
      merchants = @sa.merchants_with_high_item_count
      assert_equal 52, merchants.count
   end
@@ -42,13 +48,31 @@ class SalesAnalystTest < Minitest::Test
     assert result.is_a?(BigDecimal)
   end
 
-  def test_it_finds_golden_items
-    golden_items = @sa.golden_items
-    assert_equal 5, golden_items.count
-  end
-
   def test_average_average_item_price_for_merchant
     result = @sa.average_average_price_per_merchant
     assert result.is_a?(BigDecimal)
+  end
+
+  def test_average_item_price
+    result = @sa.average_item_price
+    expected = 250
+    assert_equal expected, result
+  end
+
+  def test_average_items_price_standard_deviation
+    result = @sa.average_items_price_standard_deviation
+    expected = 2900.99
+    assert_equal result, expected
+  end
+
+  def test_two_stdev_above
+    result = @sa.two_stdev_above_average_for_golden
+    expected = 6051.98
+    assert_equal result, expected
+  end
+
+  def test_it_finds_golden_items
+    golden_items = @sa.golden_items
+    assert_equal 5, golden_items.count
   end
 end
