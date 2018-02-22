@@ -3,8 +3,6 @@ require 'minitest/pride'
 require_relative '../lib/sales_analyst'
 require_relative '../lib/sales_engine'
 
-require_relative '../lib/sales_analyst'
-
 class SalesAnalystTest < MiniTest::Test
 
   def setup
