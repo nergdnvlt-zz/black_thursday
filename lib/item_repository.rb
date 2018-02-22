@@ -4,6 +4,7 @@ require_relative 'item'
 # Creates an item repository to hold item info
 class ItemRepository
   attr_reader :engine
+
   def initialize(filepath, parent = nil)
     @items = []
     @engine = parent
@@ -58,6 +59,6 @@ class ItemRepository
   end
 
   def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
+    "#<#{self.class} #{@items.size} rows>"
   end
 end
