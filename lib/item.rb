@@ -31,7 +31,7 @@ class Item
     @item_repo.find_by_merchant_id(merchant_id)
   end
 
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
-  end
+  # def inspect
+  #   "#<#{self.class} #{@merchants.size} rows>"
+  # end
 end

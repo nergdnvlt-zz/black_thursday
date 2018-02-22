@@ -14,17 +14,17 @@ class MerchantRepoTest < MiniTest::Test
   end
 
   def test_it_has_merchants
-    assert_equal 9, @merchant_repo.all.count
+    assert_equal 20, @merchant_repo.all.count
     assert_instance_of Array, @merchant_repo.all
     assert_equal 'Shopin1901', @merchant_repo.all.first.name
   end
 
   def test_it_can_find_by_id
-    result = @merchant_repo.find_by_id(1)
+    result = @merchant_repo.find_by_id(12334105)
 
     assert_instance_of Merchant, result
     assert_equal 'Shopin1901', result.name
-    assert_equal 1, result.id
+    assert_equal 12334105, result.id
   end
 
   def test_it_can_find_by_name
@@ -32,7 +32,7 @@ class MerchantRepoTest < MiniTest::Test
 
     assert_instance_of Merchant, result
     assert_equal 'MiniatureBikez', result.name
-    assert_equal 3, result.id
+    assert_equal 123_341_13, result.id
   end
 
   def test_find_by_name_returns_nil
@@ -45,7 +45,7 @@ class MerchantRepoTest < MiniTest::Test
     result = @merchant_repo.find_all_by_name('Ray')
 
     assert_instance_of Array, result
-    assert_equal 2, result.count
+    assert_equal 1, result.count
   end
 
   def test_find_all_returns_empty_for_no_match
