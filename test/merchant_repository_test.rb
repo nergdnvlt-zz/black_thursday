@@ -54,4 +54,8 @@ class MerchantRepoTest < MiniTest::Test
     assert_instance_of Array, result
     assert_equal [], result
   end
+
+  def test_inspect_method
+    assert_instance_of String, @merchants.inspect
+  end
 end
