@@ -63,11 +63,11 @@ class ItemTest < MiniTest::Test
     data = { items: './test/fixtures/items.csv',
              merchants: './test/fixtures/merchants.csv' }
     sales_engine = SalesEngine.new(data)
-    id = 263_395_721
+    id = 263395721
     item = sales_engine.items.find_by_id(id)
 
     assert item.id == id
-    assert item.merchant.name == 'Madewithgitterxx'
+    assert item.merchant.name == 'JUSTEmonsters'
     assert item.merchant.class == Merchant
   end
 end

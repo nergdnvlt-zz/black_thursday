@@ -35,6 +35,6 @@ class MerchantTest < MiniTest::Test
 
     assert merchant.items.class == Array
     assert merchant.items.first.class == Item
-    assert_equal 3, merchant.items.length
+    assert_equal 9, merchant.items.length
   end
 end
