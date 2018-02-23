@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'pry'
 
 require_relative '../lib/invoice_repository'
 
@@ -25,17 +26,17 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal 5, result.id
   end
 
+  def test_it_finds_by_merchant_id_returns_empty_array
+    result = @invoice_repo.find_all_by_customer_id(12335938)
+    assert_instance_of Array, result
+    assert_equal [], result
+  end
+
   def test_it_finds_by_customer_id
     result = @invoice_repo.find_all_by_customer_id(12335938)
     assert_instance_of Array, result
     assert_equal 16, result.count
-    binding.pry
   end
 
-  # def test_it_finds_by_merchant_id_returns_empty_array
-  #   result = @invoice_repo.find_all_by_customer_id(12335938)
-  #   assert_instance_of Array, result
-  #   assert_equal [], result
-  # end
 
 end
