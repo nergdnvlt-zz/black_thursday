@@ -11,9 +11,9 @@ class Invoice
     @id           = data[:id].to_i
     @name         = data[:name]
     @customer_id  = data[:customer_id]
-    @status       = data[:status]
-    @created_at   = Time.parse(data[:created_at])
-    @updated_at   = Time.parse(data[:updated_at])
+    # @status       = data[:status]
+    # @created_at   = Time.parse(data[:created_at])
+    # @updated_at   = Time.parse(data[:updated_at])
     @invoice_repo = parent
   end
 end
