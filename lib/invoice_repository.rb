@@ -29,6 +29,14 @@ class InvoiceRepository
     @invoices.find_all { |invoice| invoice.customer_id == customer }
   end
 
+  def find_all_by_merchant_id(merchant)
+    @invoices.find_all {|invoice| invoice.merchant_id == merchant }
+  end
+
+  def find_all_by_status(stat)
+    @invoices.find_all {|stat| stat.status == stat }
+  end
+
   def inspect
     "#<#{self.class} #{@invoices.size} rows>"
   end

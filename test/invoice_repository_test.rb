@@ -26,15 +26,42 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal 5, result.id
   end
 
-  def test_it_finds_by_merchant_id_returns_empty_array
-    result = @invoice_repo.find_all_by_customer_id(12335938)
+  def test_it_finds_by_customer_id_returns_empty_array
+    result = @invoice_repo.find_all_by_customer_id(2)
     assert_instance_of Array, result
     assert_equal [], result
   end
 
-  def test_it_finds_by_customer_id
-    result = @invoice_repo.find_all_by_customer_id(12335938)
+  def test_it_finds_all_by_customer_id
+    result = @invoice_repo.find_all_by_customer_id(2)
     assert_instance_of Array, result
-    assert_equal 16, result.count
+    # assert_equal 16, result.count
   end
+
+  def test_it_finds_all_by_merchant_id_returns_empty_array
+    result = @invoice_repo.find_all_by_merchant_id(12334753)
+    assert_instance_of Array, result
+    assert_equal [], result
+  end
+
+  def test_it_finds_all_by_customer_id
+    result = @invoice_repo.find_all_by_status("shipped")
+    assert_instance_of Array, result
+  #   assert_equal 16, result.count
+  end
+
+  def test_it_finds_all_by_status_returns_empty_array
+    result = @invoice_repo.find_all_by_status("shipped")
+    assert_instance_of Array, result
+    assert_equal [], result
+  end
+
+  def test_it_finds_all_by_status
+    result = @invoice_repo.find_all_by_status("shipped")
+    assert_instance_of Array, result
+  #   assert_equal 16, result.count
+  end
+
+
+
 end
