@@ -37,6 +37,4 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_instance_of Array, result
     assert_equal 16, result.count
   end
-
-
 end
