@@ -66,6 +66,7 @@ class SalesAnalystTest < Minitest::Test
     assert_equal result, expected
   end
 
+
   def test_two_stdev_above
     result = @sa.two_stdev_above_average_for_golden
     expected = 6051.98
