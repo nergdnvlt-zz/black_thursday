@@ -22,4 +22,5 @@ class Invoice
   def customer
     @invoice_repo.find_by_customer_id(customer_id)
   end
+  
 end
