@@ -7,7 +7,8 @@ require_relative '../lib/sales_engine'
 class SalesEngineTest < MiniTest::Test
   def setup
     @data = { items: './data/items.csv',
-              merchants: './data/merchants.csv' }
+              merchants: './data/merchants.csv',
+              invoices: './data/invoices.csv' }
     @sales_engine = SalesEngine.from_csv(@data)
   end
 
@@ -18,10 +19,11 @@ class SalesEngineTest < MiniTest::Test
   def test_for_from_csv_method
     assert_equal @data[:items], SalesEngine.from_csv(@data).item_csv
     assert_equal @data[:merchants], SalesEngine.from_csv(@data).merchant_csv
+    assert_equal @data[:invoices], SalesEngine.from_csv(@data).invoices_csv
   end
 
   def test_find_items_by_merchant_id
-    items = @sales_engine.find_items_by_merchant_id(12335971)
+    items = @sales_engine.find_items_by_merchant_id(123_359_71)
     assert_equal 1, items.length
   end
 end

@@ -7,7 +7,7 @@ require_relative 'invoice_repository'
 class SalesEngine
   attr_reader :item_csv,
               :merchant_csv,
-              :invoice_csv,
+              :invoices_csv,
               :items,
               :merchants,
               :invoices
@@ -15,10 +15,10 @@ class SalesEngine
   def initialize(data)
     @item_csv = data[:items]
     @merchant_csv = data[:merchants]
-    @invoice_csv = data[:invoices]
+    @invoices_csv = data[:invoices]
     @items = ItemRepository.new(@item_csv, self)
     @merchants = MerchantRepository.new(@merchant_csv, self)
-    @invoices = InvoiceRepository.new(@invoice_csv, self)
+    @invoices = InvoiceRepository.new(@invoices_csv, self)
   end
 
   def self.from_csv(data)
