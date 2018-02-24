@@ -13,4 +13,8 @@ class Merchant
   def items
     @merchant_repo.find_items_by_merchant_id(id)
   end
+
+  def invoices
+    @merchant_repo.find_invoices_by_merchant_id(id)
+  end
 end
