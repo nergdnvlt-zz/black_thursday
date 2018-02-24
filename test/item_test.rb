@@ -61,9 +61,10 @@ class ItemTest < MiniTest::Test
 
   def test_if_it_returns_the_merchant_for_an_item
     data = { items: './test/fixtures/items.csv',
-             merchants: './test/fixtures/merchants.csv' }
+             merchants: './test/fixtures/merchants.csv',
+             invoices: './data/invoices.csv' }
     sales_engine = SalesEngine.new(data)
-    id = 263395721
+    id = 263_395_721
     item = sales_engine.items.find_by_id(id)
 
     assert item.id == id

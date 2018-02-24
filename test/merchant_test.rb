@@ -28,7 +28,8 @@ class MerchantTest < MiniTest::Test
 
   def test_if_it_returns_all_items_for_a_merchant
     data = { items: './test/fixtures/items.csv',
-             merchants: './test/fixtures/merchants.csv' }
+             merchants: './test/fixtures/merchants.csv',
+             invoices: './data/invoices.csv'}
     sales_engine = SalesEngine.new(data)
     id = 123_341_85
     merchant = sales_engine.merchants.find_by_id(id)

@@ -26,42 +26,61 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal 5, result.id
   end
 
+  def test_it_can_find_by_id_returns_nil
+    result = @invoice_repo.find_by_id(500_0)
+
+    assert_nil result
+  end
+
   def test_it_finds_by_customer_id_returns_empty_array
-    result = @invoice_repo.find_all_by_customer_id(2)
+    result = @invoice_repo.find_all_by_customer_id(997)
+
     assert_instance_of Array, result
     assert_equal [], result
   end
 
   def test_it_finds_all_by_customer_id
     result = @invoice_repo.find_all_by_customer_id(2)
+
     assert_instance_of Array, result
-    # assert_equal 16, result.count
+    assert_equal 4, result.count
   end
 
   def test_it_finds_all_by_merchant_id_returns_empty_array
-    result = @invoice_repo.find_all_by_merchant_id(12334753)
+    result = @invoice_repo.find_all_by_merchant_id(12)
+
     assert_instance_of Array, result
     assert_equal [], result
   end
 
-  def test_it_finds_all_by_customer_id
-    result = @invoice_repo.find_all_by_status("shipped")
+  def test_it_finds_all_by_merchant_id
+    result = @invoice_repo.find_all_by_merchant_id(123_353_19)
+
     assert_instance_of Array, result
-  #   assert_equal 16, result.count
+    assert_equal 13, result.count
   end
 
   def test_it_finds_all_by_status_returns_empty_array
-    result = @invoice_repo.find_all_by_status("shipped")
+    result = @invoice_repo.find_all_by_status(:sold)
+
     assert_instance_of Array, result
     assert_equal [], result
   end
 
   def test_it_finds_all_by_status
-    result = @invoice_repo.find_all_by_status("shipped")
+    result = @invoice_repo.find_all_by_status(:shipped)
+
     assert_instance_of Array, result
-  #   assert_equal 16, result.count
+    assert_equal 2839, result.count
   end
 
+  def test_it_can_find_an_invoice_by_id
+    result = @invoice_repo.find_by_id(1888)
 
-
+    assert_instance_of Invoice, result
+    assert_equal 1888, result.id
+    assert_equal 375, result.customer_id
+    assert_equal 123_360_45, result.merchant_id
+    assert_equal :shipped, result.status
+  end
 end
