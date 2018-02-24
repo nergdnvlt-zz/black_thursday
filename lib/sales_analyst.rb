@@ -1,7 +1,10 @@
 require 'bigdecimal'
+require_relative 'calculator'
 
 # This class analyzes all the data from the sales engine.
 class SalesAnalyst
+  include Calculator
+
   def initialize(sales_engine)
     @sales_engine = sales_engine
   end
@@ -15,16 +18,17 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
-    (items.count.to_f / merchants.count).round(2)
+    num = items.count.to_f
+    div = merchants.count
+    Calculator.average(num, div).round(2)
   end
 
   def average_items_per_merchant_standard_deviation
-    average_item_count = average_items_per_merchant
-    Math.sqrt(
-      merchants.reduce(0) do |sum, merchant|
-        sum + (merchant.items.count - average_item_count)**2
-      end / (merchants.count - 1)
-    ).round(2)
+    average = average_items_per_merchant
+    array = merchants.map do |merchant|
+      merchant.items.count
+    end
+    Calculator.standard_deviation(array, average)
   end
 
   def one_stdev_above_average
@@ -52,16 +56,15 @@ class SalesAnalyst
   end
 
   def average_item_price
-    total = items.map { |item| item.unit_price.to_i }.reduce(:+)
-    total / items.size
+    num = items.map { |item| item.unit_price.to_i }.reduce(:+)
+    div = items.size
+    Calculator.average(num, div)
   end
 
   def average_items_price_standard_deviation
-    Math.sqrt(
-      items.reduce(0) do |sum, item|
-        sum + (item.unit_price - average_item_price)**2
-      end / (items.count - 1)
-    ).round(2)
+    average = average_item_price
+    item_array = items.map(&:unit_price)
+    Calculator.standard_deviation(item_array, average)
   end
 
   def two_stdev_above_average_for_golden
@@ -74,10 +77,4 @@ class SalesAnalyst
       item.unit_price > high_item_count
     end
   end
-
-  # def deviation_of_each_item
-  #   items.reduce(0) do |sum|
-  #     sum + items.average_item_price
-  #   end
-  # end
 end
