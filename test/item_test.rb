@@ -7,7 +7,6 @@ require_relative '../lib/sales_engine'
 # Tests the item class
 class ItemTest < MiniTest::Test
   def setup
-    @time = Time.now
     @item = Item.new({
                        id: 263_395_617,
                        name: 'Glitter scrabble frames',

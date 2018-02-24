@@ -6,7 +6,6 @@ require_relative '../lib/sales_engine'
 # Tests the item class
 class InvoiceTest < MiniTest::Test
   def setup
-    @time = Time.now
     @invoice = Invoice.new({
                        id: 2,
                        customer_id: 1,

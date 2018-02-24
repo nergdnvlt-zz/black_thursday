@@ -1,13 +1,15 @@
+require 'bigdecimal'
 require 'time'
 
+# Creates an instance of an invoice item
 class InvoiceItem
   attr_reader :id,
               :item_id,
               :invoice_id,
               :quantity,
-              :unit_price,
               :created_at,
               :updated_at,
+              :unit_price,
               :invoice_repo
 
   def initialize(data, parent = nil)
@@ -17,6 +19,11 @@ class InvoiceItem
     @quantity          = data[:quantity]
     @created_at        = Time.parse(data[:created_at])
     @updated_at        = Time.parse(data[:updated_at])
+    @unit_price        = BigDecimal.new(data[:unit_price]) / 100
     @invoice_item_repo = parent
+  end
+
+  def unit_price_in_dollars
+    @unit_price.to_f.round(2)
   end
 end
