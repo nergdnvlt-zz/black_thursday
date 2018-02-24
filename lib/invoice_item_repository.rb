@@ -6,18 +6,27 @@ class InvoiceItemRepository
   attr_reader :engine
 
   def initialize(filepath, parent = nil)
-    @invoice_item = []
+    @invoice_items = []
     @engine       = parent
     populate_invoices_item(filepath)
   end
 
   def populate_invoices_item(filepath)
     CSV.foreach(filepath, headers: true, header_converters: :symbol) do |data|
-      @invoice_item << InvoiceItem.new(data, self)
+      @invoice_items << InvoiceItem.new(data, self)
     end
   end
 
   def all
-    @invoice_item
+    @invoice_items
+  end
+
+  def find_by_id(id)
+    @invoice_items.find { |invoice_item| invoice_item.id == id }
+  end
+
+  def find_all_by_item_id(item_id)
+    @invoice_items.find_all { |invoice_item| invoice_item.item_id == item_id }
+
   end
 end
