@@ -17,6 +17,10 @@ class SalesAnalyst
     @sales_engine.items.all
   end
 
+  def invoices
+    @sales_engine.invoices.all
+  end
+
   def average_items_per_merchant
     num = items.count.to_f
     div = merchants.count
@@ -58,7 +62,7 @@ class SalesAnalyst
   def average_item_price
     num = items.map { |item| item.unit_price.to_i }.reduce(:+)
     div = items.size
-    Calculator.average(num, div)
+    Calculator.average(num, div).round(2)
   end
 
   def average_items_price_standard_deviation
@@ -68,7 +72,7 @@ class SalesAnalyst
   end
 
   def two_stdev_above_average_for_golden
-    average_item_price + (average_items_price_standard_deviation * 2)
+    average_item_price + (average_items_price_standard_deviation * 2).round(2)
   end
 
   def golden_items
@@ -76,5 +80,12 @@ class SalesAnalyst
     items.find_all do |item|
       item.unit_price > high_item_count
     end
+  end
+
+  def average_invoices_per_merchant
+    num = invoices.size
+    div = merchants.size
+    # require "pry"; binding.pry
+    Calculator.average(num, div).round(2)
   end
 end

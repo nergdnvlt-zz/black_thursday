@@ -13,14 +13,14 @@ class SalesAnalystTest < Minitest::Test
     @sa = SalesAnalyst.new(@se)
   end
 
-  def test_it_finds_all_the_merchants
+  def test_it_finds_all_of_everything
     merchants = @sa.merchants
-    assert_equal 475, merchants.count
-  end
-
-  def test_it_finds_all_the_items
     items = @sa.items
-    assert_equal 1367, items.count
+    invoices = @sa.invoices
+
+    assert_equal 475, merchants.size
+    assert_equal 1367, items.size
+    assert_equal 4985, invoices.size
   end
 
   def test_it_finds_average_items_per_merchant
@@ -40,8 +40,8 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_merchants_with_the_highest_item_counts
-     merchants = @sa.merchants_with_high_item_count
-     assert_equal 52, merchants.count
+    merchants = @sa.merchants_with_high_item_count
+    assert_equal 52, merchants.count
   end
 
   def test_average_item_price_for_merchant
@@ -56,7 +56,7 @@ class SalesAnalystTest < Minitest::Test
 
   def test_average_item_price
     result = @sa.average_item_price
-    expected = 250
+    expected = 250.93
     assert_equal expected, result
   end
 
@@ -66,15 +66,19 @@ class SalesAnalystTest < Minitest::Test
     assert_equal result, expected
   end
 
-
   def test_two_stdev_above
     result = @sa.two_stdev_above_average_for_golden
-    expected = 6051.98
+    expected = 6052.91
     assert_equal result, expected
   end
 
   def test_it_finds_golden_items
     golden_items = @sa.golden_items
     assert_equal 5, golden_items.count
+  end
+
+  def test_average_invoices_per_merchant
+    result = @sa.average_invoices_per_merchant
+    assert_equal 10.49, result
   end
 end

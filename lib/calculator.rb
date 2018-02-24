@@ -1,7 +1,7 @@
 # Built to pull out repitition in calculations
 module Calculator
   def self.average(num, div)
-    num / div
+    num.to_f / div
   end
 
   def self.standard_deviation(array, average)
