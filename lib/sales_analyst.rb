@@ -5,8 +5,11 @@ require_relative 'calculator'
 class SalesAnalyst
   include Calculator
 
+  attr_reader :days
+
   def initialize(sales_engine)
     @sales_engine = sales_engine
+    @days = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
   end
 
   def merchants
@@ -132,4 +135,26 @@ class SalesAnalyst
     bottom_merchants = find_bottom_merchants
     bottom_merchants.map { |invoice| invoice[1] }
   end
+
+  def invoices_by_day
+    invoices.map { |invoice| invoice.created_at.strftime('%A') }
+  end
+
+  def invoice_count_by_day
+    @days.map { |day| invoices_by_day.count(day) }
+  end
+
+  def average_invoices_per_day
+    count = 7
+    total = invoice_count_by_day.reduce(:+)
+    Calculator.average(total, count).round(2)
+  end
+
+  # def invoices_per_day_standard_deviation
+  #   dif = @days_of_week_invoice_count.map do |num|
+  #     (num - @avg_invoices_per_day)**2
+  #   end
+  #   added = dif.inject { |sum, num| sum + num }.to_f
+  #   Math.sqrt(added / (@days_of_week_invoice_count.count - 1)).round(2)
+  # end
 end
