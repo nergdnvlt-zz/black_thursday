@@ -172,13 +172,7 @@ class SalesAnalyst
     array.find_all { |invoice| invoice[0] > (average + stdev) }
   end
 
-
   def top_days_by_invoice_count
-    # array = attach_invoice_count_to_day
-    # average = average_invoices_per_day
-    # stdev = invoice_per_day_stdev
-    # found = array.find_all { |invoice| invoice[0] > (average + stdev) }
-    # found.map { |day| day[1] }
     find_all_invoices_for_top_days.map { |day| day[1] }
   end
 end
