@@ -92,12 +92,35 @@ class SalesAnalyst
     @sales_engine.invoices.find_all_by_merchant_id(merchant_id).size
   end
 
+  def total_invoices_per_merchant
+    merchants.map do |merchant|
+      total_invoices(merchant.id)
+    end
+  end
+
+  # def invoices_per_merchant
+  #   merchants.map do |merchant|
+  #     @sales_engine.find_invoices_by_merchant_id(merchant.id).count
+  #   end
+  # end
+
   def average_invoices_per_merchant_standard_deviation
     average = average_invoices_per_merchant
     array = merchants.map { |merchant| total_invoices(merchant.id) }
     Calculator.standard_deviation(array, average)
   end
 
-  def top_merchants_by_invoice_count
+  def invoice_two_stdev
+    zscore2 = (average_invoices_per_merchant_standard_deviation * 2)
+    average_invoices_per_merchant + zscore2
   end
+
+
+  # def top_merchants_by_invoice_count
+  #    zipped = @invoices_per_merchant.zip(@merchants)
+  #    average = @avg_invoices_per_merchant
+  #    stdev = @avg_inv_per_merch_stdev
+  #    found = zipped.find_all { |invoice| invoice[0] > (average + (stdev * 2)) }
+  #    found.map { |invoice| invoice[1] }
+  #  end
 end

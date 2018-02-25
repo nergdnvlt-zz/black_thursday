@@ -74,6 +74,8 @@ class SalesAnalystTest < Minitest::Test
 
   def test_it_finds_golden_items
     golden_items = @sa.golden_items
+
+    assert_instance_of Array, golden_items
     assert_equal 5, golden_items.count
   end
 
@@ -94,6 +96,21 @@ class SalesAnalystTest < Minitest::Test
     assert_equal expected, result
   end
 
+  def test_invoice_to_stdev
+    result = @sa.invoice_two_stdev
+    expected = 17.07
+    assert_equal expected, result
+  end
+
+  def test_invoice_per_merchant
+    result = @sa.total_invoices_per_merchant
+    print result
+    # assert_instance_of Array, result
+    # assert_equal 475, result.size
+  end
+
   # def test_top_merchants_by_invoice_count
+  #   result = @sa.top_merchants_by_invoice_count
+  #   puts result
   # end
 end
