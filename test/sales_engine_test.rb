@@ -9,11 +9,11 @@ class SalesEngineTest < MiniTest::Test
     @data = { items: './data/items.csv',
               merchants: './data/merchants.csv',
               invoices: './data/invoices.csv' }
-    @sales_engine = SalesEngine.from_csv(@data)
+    @se = SalesEngine.from_csv(@data)
   end
 
   def test_it_exists
-    assert_instance_of SalesEngine, @sales_engine
+    assert_instance_of SalesEngine, @se
   end
 
   def test_for_from_csv_method
@@ -23,7 +23,18 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_find_items_by_merchant_id
-    items = @sales_engine.find_items_by_merchant_id(123_359_71)
+    items = @se.find_items_by_merchant_id(123_359_71)
     assert_equal 1, items.length
+  end
+
+  def test_find_by_id
+    result = @se.find_by_id(123_359_71)
+    assert_instance_of Merchant, result
+  end
+
+  def test_find_invoices_by_merchant_id
+    result = @se.find_invoices_by_merchant_id(123_359_71)
+    assert_instance_of Array, result
+    assert_instance_of Invoice, result.first
   end
 end

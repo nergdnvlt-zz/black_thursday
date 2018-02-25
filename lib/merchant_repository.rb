@@ -1,5 +1,6 @@
 require 'CSV'
 require_relative 'merchant'
+require_relative 'sales_engine'
 
 # Creates a merchant repository to hold merchant info
 class MerchantRepository

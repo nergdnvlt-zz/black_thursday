@@ -6,6 +6,12 @@ require_relative '../lib/sales_engine'
 
 # Testing merchant class
 class MerchantTest < MiniTest::Test
+  def setup
+    @data = { items: './test/fixtures/items.csv',
+              merchants: './test/fixtures/merchants.csv',
+              invoices: './data/invoices.csv' }
+  end
+
   def tests_it_exists
     merchant = Merchant.new({id: '5', name: 'Turing School'})
 
@@ -27,15 +33,22 @@ class MerchantTest < MiniTest::Test
   end
 
   def test_if_it_returns_all_items_for_a_merchant
-    data = { items: './test/fixtures/items.csv',
-             merchants: './test/fixtures/merchants.csv',
-             invoices: './data/invoices.csv'}
-    sales_engine = SalesEngine.new(data)
+    sales_engine = SalesEngine.new(@data)
     id = 123_341_85
     merchant = sales_engine.merchants.find_by_id(id)
 
-    assert merchant.items.class == Array
-    assert merchant.items.first.class == Item
+    assert_instance_of Array, merchant.items
+    assert_instance_of Item, merchant.items.first
     assert_equal 9, merchant.items.length
+  end
+
+  def test_if_it_returns_all_invoices_for_a_merchant
+    sales_engine = SalesEngine.new(@data)
+    id = 123_341_85
+    merchant = sales_engine.merchants.find_by_id(id)
+
+    assert_instance_of Array, merchant.invoices
+    assert_instance_of Invoice, merchant.invoices.first
+    assert_equal 10, merchant.invoices.length
   end
 end
