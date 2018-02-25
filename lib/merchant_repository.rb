@@ -1,5 +1,6 @@
 require 'CSV'
 require_relative 'merchant'
+require_relative 'sales_engine'
 
 # Creates a merchant repository to hold merchant info
 class MerchantRepository
@@ -38,6 +39,10 @@ class MerchantRepository
     @merchants.find_all do |merchant|
       merchant.name.downcase.include?(name_frag.downcase)
     end
+  end
+
+  def find_invoices_by_merchant_id(id)
+    @engine.find_invoices_by_merchant_id(id)
   end
 
   def inspect
