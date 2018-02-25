@@ -6,9 +6,10 @@ require_relative '../lib/sales_engine'
 # Testing merchant class
 class SalesEngineTest < MiniTest::Test
   def setup
-    @data = { items: './data/items.csv',
-              merchants: './data/merchants.csv',
-              invoices: './data/invoices.csv' }
+    @data = { items:         './data/items.csv',
+              merchants:     './data/merchants.csv',
+              invoices:      './data/invoices.csv',
+              invoice_items: './data/invoice_items.csv' }
     @se = SalesEngine.from_csv(@data)
   end
 
