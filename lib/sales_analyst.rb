@@ -107,9 +107,14 @@ class SalesAnalyst
     Calculator.standard_deviation(array, average)
   end
 
-  def invoice_two_stdev
-    zscore2 = (average_invoices_per_merchant_standard_deviation * 2)
-    average_invoices_per_merchant + zscore2
+  def invoice_two_stdev_up
+    zscore = average_invoices_per_merchant_standard_deviation
+    average_invoices_per_merchant + (zscore * 2)
+  end
+
+  def invoice_two_stdev_down
+    zscore = average_invoices_per_merchant_standard_deviation
+    average_invoices_per_merchant - (zscore * 2)
   end
 
   def zip_merchants_by_invoice
@@ -117,7 +122,7 @@ class SalesAnalyst
   end
 
   def find_upper_merchants
-    zscore = invoice_two_stdev
+    zscore = invoice_two_stdev_up
     zip_merchants_by_invoice.find_all { |invoice| invoice[0] > zscore }
   end
 
@@ -127,7 +132,7 @@ class SalesAnalyst
   end
 
   def find_bottom_merchants
-    zscore = invoice_two_stdev
+    zscore = invoice_two_stdev_down
     zip_merchants_by_invoice.find_all { |invoice| invoice[0] < zscore }
   end
 
@@ -150,11 +155,30 @@ class SalesAnalyst
     Calculator.average(total, count).round(2)
   end
 
-  # def invoices_per_day_standard_deviation
-  #   dif = @days_of_week_invoice_count.map do |num|
-  #     (num - @avg_invoices_per_day)**2
-  #   end
-  #   added = dif.inject { |sum, num| sum + num }.to_f
-  #   Math.sqrt(added / (@days_of_week_invoice_count.count - 1)).round(2)
-  # end
+  def invoice_per_day_stdev
+    array = invoice_count_by_day
+    average = average_invoices_per_day
+    Calculator.standard_deviation(array, average)
+  end
+
+  def attach_invoice_count_to_day
+    invoice_count_by_day.zip(@days)
+  end
+
+  def find_all_invoices_for_top_days
+    array = attach_invoice_count_to_day
+    average = average_invoices_per_day
+    stdev = invoice_per_day_stdev
+    array.find_all { |invoice| invoice[0] > (average + stdev) }
+  end
+
+
+  def top_days_by_invoice_count
+    # array = attach_invoice_count_to_day
+    # average = average_invoices_per_day
+    # stdev = invoice_per_day_stdev
+    # found = array.find_all { |invoice| invoice[0] > (average + stdev) }
+    # found.map { |day| day[1] }
+    find_all_invoices_for_top_days.map { |day| day[1] }
+  end
 end
