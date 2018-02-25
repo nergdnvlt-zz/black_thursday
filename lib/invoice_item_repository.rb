@@ -7,7 +7,7 @@ class InvoiceItemRepository
 
   def initialize(filepath, parent = nil)
     @invoice_items = []
-    @engine       = parent
+    @engine        = parent
     populate_invoices_item(filepath)
   end
 
