@@ -12,12 +12,6 @@ class MerchantTest < MiniTest::Test
               invoices: './data/invoices.csv' }
   end
 
-  def tests_it_exists
-    merchant = Merchant.new({id: '5', name: 'Turing School'})
-
-    assert_instance_of Merchant, merchant
-  end
-
   def test_it_has_attributes
     merchant = Merchant.new({id: '5', name: 'Turing School'})
 
@@ -30,6 +24,7 @@ class MerchantTest < MiniTest::Test
 
     assert_equal 8, merchant.id
     assert_equal 'Hogwarts', merchant.name
+    assert_instance_of Merchant, merchant
   end
 
   def test_if_it_returns_all_items_for_a_merchant
