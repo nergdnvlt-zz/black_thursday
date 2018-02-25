@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 require_relative '../lib/merchant_repository'
+require_relative '../lib/sales_engine'
 
 # Testing merchant repository
 class MerchantRepoTest < MiniTest::Test
@@ -56,6 +57,6 @@ class MerchantRepoTest < MiniTest::Test
   end
 
   def test_inspect_method
-    assert_instance_of String, @merchants.inspect
+    assert_instance_of String, @merchant_repo.inspect
   end
 end
