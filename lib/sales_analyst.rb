@@ -109,11 +109,27 @@ class SalesAnalyst
     average_invoices_per_merchant + zscore2
   end
 
-  def top_merchants_by_invoice_count
-    combined = total_invoices_per_merchant.zip(merchants)
-    zscore = invoice_two_stdev
+  def zip_merchants_by_invoice
+    total_invoices_per_merchant.zip(merchants)
+  end
 
-    found = combined.find_all { |invoice| invoice[0] > zscore }
-    found.map { |invoice| invoice[1] }
+  def find_upper_merchants
+    zscore = invoice_two_stdev
+    zip_merchants_by_invoice.find_all { |invoice| invoice[0] > zscore }
+  end
+
+  def top_merchants_by_invoice_count
+    top_merchants = find_upper_merchants
+    top_merchants.map { |invoice| invoice[1] }
+  end
+
+  def find_bottom_merchants
+    zscore = invoice_two_stdev
+    zip_merchants_by_invoice.find_all { |invoice| invoice[0] < zscore }
+  end
+
+  def bottom_merchants_by_invoice_count
+    bottom_merchants = find_bottom_merchants
+    bottom_merchants.map { |invoice| invoice[1] }
   end
 end

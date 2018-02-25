@@ -109,10 +109,40 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 475, result.size
   end
 
+  def test_zip_merchants
+    result = @sa.zip_merchants_by_invoice
+
+    assert_instance_of Array, result
+    assert_instance_of Array, result.first
+  end
+
+  def test_upper_merchants
+    result = @sa.find_upper_merchants
+
+    assert_instance_of Array, result
+    assert_instance_of Array, result
+  end
+
   def test_top_merchants_by_invoice_count
     result = @sa.top_merchants_by_invoice_count
 
     assert_instance_of Array, result
     assert_instance_of Merchant, result.first
+  end
+
+  def test_bottom_merchants
+    result = @sa.find_bottom_merchants
+
+    assert_instance_of Array, result
+    assert_instance_of Array, result.first
+    refute_equal @sa.find_upper_merchants, result
+  end
+
+  def test_bottom_merchants_by_invoice_count
+    result = @sa.bottom_merchants_by_invoice_count
+
+    assert_instance_of Array, result
+    assert_instance_of Merchant, result.first
+    refute_equal @sa.top_merchants_by_invoice_count, result
   end
 end
