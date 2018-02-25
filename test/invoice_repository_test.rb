@@ -83,4 +83,8 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal 123_360_45, result.merchant_id
     assert_equal :shipped, result.status
   end
+
+  def test_inspect_method
+    assert_instance_of String, @invoice_repo.inspect
+  end
 end
