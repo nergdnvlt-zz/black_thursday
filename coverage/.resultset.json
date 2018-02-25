@@ -103,6 +103,7 @@
         1,
         1,
         null,
+      "/Users/georgeanthony/turing/1module/project/blk-thursday/black_thursday/lib/item_repository.rb": [
         1,
         1,
         1,
@@ -164,7 +165,6 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/lib/invoice.rb": [
         1,
         null,
         1,
@@ -191,7 +191,6 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/test/invoice_test.rb": [
         1,
         1,
         1,
@@ -252,7 +251,7 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/lib/sales_engine.rb": [
+      "/Users/georgeanthony/turing/1module/project/blk-thursday/black_thursday/lib/sales_engine.rb": [
         1,
         1,
         1,
@@ -297,7 +296,7 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/lib/merchant_repository.rb": [
+      "/Users/georgeanthony/turing/1module/project/blk-thursday/black_thursday/lib/merchant_repository.rb": [
         1,
         1,
         1,
@@ -350,7 +349,7 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/lib/merchant.rb": [
+      "/Users/georgeanthony/turing/1module/project/blk-thursday/black_thursday/lib/merchant.rb": [
         null,
         1,
         1,
@@ -372,7 +371,6 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/lib/item_repository.rb": [
         1,
         1,
         null,
@@ -438,7 +436,6 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/lib/item.rb": [
         1,
         1,
         null,
@@ -473,7 +470,6 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/test/item_respository_test.rb": [
         1,
         1,
         null,
@@ -559,11 +555,6 @@
         null,
         null
       ],
-      "/Users/nergdnvlt/new_turing/1module/projects/blkthr/black_thursday/test/item_test.rb": [
-        null,
-        1,
-        1,
-        1,
         1,
         null,
         null,
@@ -1195,6 +1186,5 @@
         null
       ]
     },
-    "timestamp": 1519576508
   }
 }

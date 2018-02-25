@@ -22,4 +22,5 @@ class Invoice
   def merchant
     @invoice_repo.find_merchant_by_merchant_id(merchant_id)
   end
+  
 end
