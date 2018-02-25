@@ -85,7 +85,19 @@ class SalesAnalyst
   def average_invoices_per_merchant
     num = invoices.size
     div = merchants.size
-    # require "pry"; binding.pry
     Calculator.average(num, div).round(2)
+  end
+
+  def total_invoices(merchant_id)
+    @sales_engine.invoices.find_all_by_merchant_id(merchant_id).size
+  end
+
+  def average_invoices_per_merchant_standard_deviation
+    average = average_invoices_per_merchant
+    array = merchants.map { |merchant| total_invoices(merchant.id) }
+    Calculator.standard_deviation(array, average)
+  end
+
+  def top_merchants_by_invoice_count
   end
 end

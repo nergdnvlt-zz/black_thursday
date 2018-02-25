@@ -11,7 +11,7 @@ class CalculatorTest < Minitest::Test
   def test_array_average
     array = [10, 2, 38, 23, 38, 23, 21]
     result = Calculator.array_average(array)
-    assert_equal 22, result
+    assert_equal 22.14, result.round(2)
   end
 
   def test_standard_deviation
@@ -19,6 +19,6 @@ class CalculatorTest < Minitest::Test
     average = Calculator.array_average(array)
     result = Calculator.standard_deviation(array, average)
 
-    assert_equal 13.27, result
+    assert_equal 13.28, result
   end
 end
