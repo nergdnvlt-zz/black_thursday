@@ -1,53 +1,42 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'helper_test'
 require_relative '../lib/invoice_item'
-require_relative '../lib/sales_engine'
+require 'bigdecimal'
+require 'time'
 
-# Tests the item class
-class InvoiceTest < MiniTest::Test
+# Tests the info passes correctly in InvoiceItems
+class InvoiceItemTest < Minitest::Test
   def setup
-    @invoice_item = InvoiceItem.new({ id: 6,
-                                      item_id: 7,
-                                      invoice_id: 8,
-                                      quantity: 1,
-                                      unit_price: 1099,
-                                      created_at: Time.now.inspect,
-                                      updated_at: Time.now.inspect })
+    @info = { id:           88,
+              item_id:      66,
+              invoice_id:   46,
+              quantity:     10,
+              unit_price:   BigDecimal.new(10.994, 4),
+              created_at:   '2018-02-02 14:37:20 -0700',
+              updated_at:   '2018-02-02 14:37:20 -0700' }
+    @invoice_item = InvoiceItem.new(@info)
   end
 
-  def test_it_has_an_id
-    assert_equal 6, @invoice_item.id
+  def test_if_it_exists
+    assert_instance_of InvoiceItem, @invoice_item
   end
 
-  def test_it_has_item_id
-    assert_equal 7, @invoice_item.item_id
+  def test_id_attributes
+    assert_equal @info[:id], @invoice_item.id
+    assert_equal @info[:item_id], @invoice_item.item_id
+    assert_equal @info[:invoice_id], @invoice_item.invoice_id
   end
 
-  def test_it_has_a_invoice_id
-    assert_equal 8, @invoice_item.invoice_id
+  def test_quantituy_and_price_attributes
+    assert_equal @info[:quantity], @invoice_item.quantity
+    assert_equal 0.1099e0, @invoice_item.unit_price
   end
 
-  def test_it_has_a_quantity
-    assert_equal 1, @invoice_item.quantity
+  def test_time_attributes
+    assert_instance_of Time, @invoice_item.created_at
+    assert_instance_of Time, @invoice_item.updated_at
   end
 
-  def test_it_has_created_at
-    result = @invoice_item.created_at
-
-    assert_equal Time.now.inspect, result.inspect
-  end
-
-  def test_it_has_updated_at
-    result = @invoice_item.updated_at
-
-    assert_equal Time.now.inspect, result.inspect
-  end
-
-  def test_it_has_unit_price
-    assert_equal 0.1099e2,@invoice_item.unit_price
-  end
-
-  def test_it_has_unit_price_to_dollars
-    assert_equal 10.99, @invoice_item.unit_price_in_dollars
+  def test_if_it_can_return_unit_price_in_dollars
+    assert_equal '$0.11', @invoice_item.unit_price_to_dollars
   end
 end

@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'pry'
+require_relative 'helper_test'
 
 require_relative '../lib/invoice_item_repository'
 
