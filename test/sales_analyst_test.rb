@@ -104,13 +104,15 @@ class SalesAnalystTest < Minitest::Test
 
   def test_invoice_per_merchant
     result = @sa.total_invoices_per_merchant
-    print result
-    # assert_instance_of Array, result
-    # assert_equal 475, result.size
+
+    assert_instance_of Array, result
+    assert_equal 475, result.size
   end
 
-  # def test_top_merchants_by_invoice_count
-  #   result = @sa.top_merchants_by_invoice_count
-  #   puts result
-  # end
+  def test_top_merchants_by_invoice_count
+    result = @sa.top_merchants_by_invoice_count
+
+    assert_instance_of Array, result
+    assert_instance_of Merchant, result.first
+  end
 end
