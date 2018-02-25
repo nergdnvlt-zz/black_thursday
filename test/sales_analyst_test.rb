@@ -192,4 +192,19 @@ class SalesAnalystTest < Minitest::Test
     result = @sa.top_days_by_invoice_count
     assert_equal ['Wednesday'], result
   end
+
+  def test_status_percentage_pending
+    result = @sa.invoice_status(:pending)
+    assert_equal 29.55, result
+  end
+
+  def test_status_percentage_shipped
+    result = @sa.invoice_status(:shipped)
+    assert_equal 56.95, result
+  end
+
+  def test_status_percentage_returned
+    result = @sa.invoice_status(:returned)
+    assert_equal 13.5, result
+  end
 end

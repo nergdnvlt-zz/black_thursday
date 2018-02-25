@@ -175,4 +175,14 @@ class SalesAnalyst
   def top_days_by_invoice_count
     find_all_invoices_for_top_days.map { |day| day[1] }
   end
+
+  def invoice_status(status)
+    num = find_all_status(status)
+    div = invoices.count
+    ((num / div) * 100).round 2
+  end
+
+  def find_all_status(status)
+    @sales_engine.invoices.find_all_by_status(status).count.to_f
+  end
 end
