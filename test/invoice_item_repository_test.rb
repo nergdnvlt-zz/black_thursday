@@ -15,7 +15,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_it_has_id
-    assert_equal 21830, @invoice_item_repo.all.count
+    assert_equal 218_30, @invoice_item_repo.all.count
     assert_instance_of Array, @invoice_item_repo.all
   end
 
@@ -25,14 +25,18 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_it_can_find_all_by_item_id
-    result = @invoice_item_repo.find_all_by_item_id(263519844)
+    result = @invoice_item_repo.find_all_by_item_id(263_519_844)
     assert_instance_of Array, result
-    # assert_equal 164, result.count
+    assert_equal 164, result.count
   end
 
-  def test_it_can_find_all_by_invoice_id
-    result = @invoice_item_repo.find_all_by_invoice_id(1)
+  def test_it_returns_empty_array_for_find_all_by_invoice_id
+    result = @invoice_item_repo.find_all_by_invoice_id(5000)
     assert_instance_of Array, result
-    # assert_equal 164, result.count
+    assert_equal [], result
+  end
+
+  def test_inspect_method
+    assert_instance_of String, @invoice_item_repo.inspect
   end
 end

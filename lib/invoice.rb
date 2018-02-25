@@ -1,5 +1,6 @@
 require 'time'
 
+# Class to hold all the invoice info in a single object
 class Invoice
   attr_reader :id,
               :customer_id,
@@ -22,5 +23,4 @@ class Invoice
   def merchant
     @invoice_repo.find_merchant_by_merchant_id(merchant_id)
   end
-  
 end
