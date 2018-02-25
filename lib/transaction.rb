@@ -12,13 +12,14 @@ class Transaction
               :transaction_repo
 
   def initialize(data, parent = nil)
-    @id = data[:id].to_i
-    @invoice = data[:invoice_id]
-    @credit_card_number = data[:credit_card_number]
+    @id                          = data[:id].to_i
+    @invoice_id                  = data[:invoice_id]
+    @credit_card_number          = data[:credit_card_number]
     @credit_card_expiration_date = data[:credit_card_expiration_date]
-    @result = data[:result]
-    @created_at = Time.parse(data[:created_at])
-    @updated_at = Time.parse(data[:updated_at])
-    @merchant_id = data[:merchant_id].to_i
-    @transaction_repo = parent
+    @result                      = data[:result]
+    @created_at                  = Time.parse(data[:created_at])
+    @updated_at                  = Time.parse(data[:updated_at])
+    @merchant_id                 = data[:merchant_id].to_i
+    @transaction_repo            = parent
   end
+end
