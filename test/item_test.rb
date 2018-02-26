@@ -62,7 +62,8 @@ class ItemTest < MiniTest::Test
     data = { items:         './test/fixtures/items.csv',
              merchants:     './test/fixtures/merchants.csv',
              invoices:      './data/invoices.csv',
-             invoice_items: './data/invoice_items.csv' }
+             invoice_items: './data/invoice_items.csv',
+             customers:     './data/customers.csv' }
     sales_engine = SalesEngine.new(data)
     id = 263_395_721
     item = sales_engine.items.find_by_id(id)

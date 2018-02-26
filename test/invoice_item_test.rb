@@ -11,8 +11,8 @@ class InvoiceItemTest < Minitest::Test
               invoice_id:   46,
               quantity:     10,
               unit_price:   BigDecimal.new(10.994, 4),
-              created_at:   '2018-02-02 14:37:20 -0700',
-              updated_at:   '2018-02-02 14:37:20 -0700' }
+              created_at:   Time.now.inspect,
+              updated_at:   Time.now.inspect }
     @invoice_item = InvoiceItem.new(@info)
   end
 
