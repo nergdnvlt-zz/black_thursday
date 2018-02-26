@@ -31,7 +31,7 @@ class ItemRepositoryTest < MiniTest::Test
   def test_find_all_with_descriptions
     result = @item_repo.find_all_with_description('scrabble frames')
     assert_instance_of Array, result
-    assert_equal 3, result.count
+    assert_equal 1, result.count
   end
 
   def test_find_all_with_desc_returns_empty_for_no_match
@@ -44,7 +44,7 @@ class ItemRepositoryTest < MiniTest::Test
   def test_find_all_by_price
     result = @item_repo.find_all_by_price(13.00)
     assert_instance_of Array, result
-    assert_equal 5, result.count
+    assert_equal 8, result.count
   end
 
   def test_find_all_by_price_returns_empty_array_for_nil
@@ -56,11 +56,11 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_finds_by_range
     result = @item_repo.find_all_by_price_in_range(12.00..14.00)
     assert_instance_of Array, result
-    assert_equal 9, result.count
+    assert_equal 70, result.count
   end
 
   def test_it_finds_by_range_returns_empty
-    result = @item_repo.find_all_by_price_in_range(1.00..2.00)
+    result = @item_repo.find_all_by_price_in_range(20000..20001)
     assert_instance_of Array, result
     assert_equal [], result
   end
@@ -68,7 +68,7 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_finds_by_merchant_id
     result = @item_repo.find_all_by_merchant_id(123_341_85)
     assert_instance_of Array, result
-    assert_equal 9, result.count
+    assert_equal 6, result.count
   end
 
   def test_it_finds_by_merchant_id_returns_empty_array
