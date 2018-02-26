@@ -3,7 +3,8 @@ require_relative 'invoice_item'
 
 # Creates a invoice item repository to hold merchant info
 class InvoiceItemRepository
-  attr_reader :engine
+  attr_reader :engine,
+              :invoice_items
 
   def initialize(filepath, parent = nil)
     @invoice_items = []

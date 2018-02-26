@@ -29,7 +29,7 @@ class SalesEngine
     new(data)
   end
 
-  def find_by_id(id)
+  def find_merchant(id)
     @merchants.find_by_id(id)
   end
 
@@ -43,5 +43,17 @@ class SalesEngine
 
   def find_invoices_by_merchant_id(id)
     @invoices.find_all_by_merchant_id(id)
+  end
+
+  def find_invoice(invoice_id)
+    @invoices.find_by_id(invoice_id)
+  end
+
+  def find_invoice_items_by_invoice_id(id)
+    @invoice_items.find_all_by_invoice_id(id)
+  end
+
+  def find_item_by_id(item_id)
+    @items.find_by_id(item_id)
   end
 end
