@@ -30,4 +30,12 @@ class Invoice
       invoice_repo.find_item_by_id(invoice_item.item_id)
     end.compact
   end
+
+  def transactions
+    @invoice_repo.find_transactions_by_invoice_id(id)
+  end
+
+  def customer
+    @invoice_repo.find_customers_by_customer_id(@customer_id)
+  end
 end

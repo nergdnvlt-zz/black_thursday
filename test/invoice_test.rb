@@ -13,6 +13,12 @@ class InvoiceTest < MiniTest::Test
               status: 'shipped',
               created_at: Time.now.inspect,
               updated_at: Time.now.inspect }
+    @csvinfo = { items:         './data/items.csv',
+                 merchants:     './data/merchants.csv',
+                 invoices:      './data/invoices.csv',
+                 invoice_items: './data/invoice_items.csv',
+                 transactions:  './data/transactions.csv',
+                 customers:     './data/customers.csv' }
     @invoice = Invoice.new(@data)
   end
 
@@ -45,13 +51,7 @@ class InvoiceTest < MiniTest::Test
   end
 
   def test_if_it_returns_the_merchant_for_an_invoice
-    data = { items:         './data/items.csv',
-             merchants:     './data/merchants.csv',
-             invoices:      './data/invoices.csv',
-             invoice_items: './data/invoice_items.csv',
-             customers:     './data/customers.csv',
-             transactions:  './data/transactions.csv' }
-    sales_engine = SalesEngine.new(data)
+    sales_engine = SalesEngine.new(@csvinfo)
     id = 641
     invoice = sales_engine.invoices.find_by_id(id)
 
@@ -61,18 +61,30 @@ class InvoiceTest < MiniTest::Test
   end
 
   def test_if_it_returns_all_items_for_an_invoice
-    data = { items:         './data/items.csv',
-             merchants:     './data/merchants.csv',
-             invoices:      './data/invoices.csv',
-             invoice_items: './data/invoice_items.csv',
-             customers:     './data/customers.csv',
-             transactions:  './data/transactions.csv' }
-    sales_engine = SalesEngine.new(data)
-    id = 888
+    sales_engine = SalesEngine.new(@csvinfo)
+    id = 106
     invoice = sales_engine.invoices.find_by_id(id)
 
     assert invoice.id == id
     assert_instance_of Item, invoice.items.first
     assert invoice.items.first.class == Item
+  end
+
+  def test_if_it_returns_all_transactions_for_an_invoice
+   sales_engine = SalesEngine.new(@csvinfo)
+   id = 106
+   invoice = sales_engine.invoices.find_by_id(id)
+
+   assert invoice.id == id
+   assert_instance_of Transaction, invoice.transactions.first
+ end
+
+  def test_if_it_returns_customer_based_on_customer_id
+    sales_engine = SalesEngine.new(@csvinfo)
+    id = 106
+    invoice = sales_engine.invoices.find_by_id(id)
+
+    assert invoice.id == id
+    assert_instance_of Customer, invoice.customer
   end
 end
