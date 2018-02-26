@@ -13,12 +13,12 @@ class SalesEngine
               :invoices
 
   def initialize(data)
-    @item_csv = data[:items]
+    @item_csv     = data[:items]
     @merchant_csv = data[:merchants]
     @invoices_csv = data[:invoices]
-    @items = ItemRepository.new(@item_csv, self)
-    @merchants = MerchantRepository.new(@merchant_csv, self)
-    @invoices = InvoiceRepository.new(@invoices_csv, self)
+    @items        = ItemRepository.new(@item_csv, self)
+    @merchants    = MerchantRepository.new(@merchant_csv, self)
+    @invoices     = InvoiceRepository.new(@invoices_csv, self)
   end
 
   def self.from_csv(data)
