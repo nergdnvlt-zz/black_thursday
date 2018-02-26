@@ -186,24 +186,4 @@ class SalesAnalyst
   def find_all_status(status)
     @sales_engine.invoices.find_all_by_status(status).count.to_f
   end
-
-  def top_buyers(num = 20)
-    hash = {}
-    @sales_engine.customers.all.each do |customer|
-      buyers_hash(customer, hash)
-    end
-    top_customers = hash.keys.max(num)
-    top_customers.map { |key| hash[key] }
-  end
-
-  def buyers_hash(customer, hash)
-    invoices = find_invoices(customer.id)
-    paid_invoices = invoices.find_all(&:is_paid_in_full?)
-    invoice_costs = paid_invoices.map(&:total)
-    hash[invoice_costs.reduce(:+).to_f] = customer
-  end
-
-  def find_invoices(customer_id)
-    @sales_engine.invoices.find_all_by_customer_id(customer_id)
-  end
 end
