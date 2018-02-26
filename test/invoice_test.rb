@@ -87,4 +87,21 @@ class InvoiceTest < MiniTest::Test
     assert invoice.id == id
     assert_instance_of Customer, invoice.customer
   end
+
+  def test_return_value_if_invoice_is_paid_in_full
+    sales_engine = SalesEngine.new(@csvinfo)
+    id = 1
+    invoice = sales_engine.invoices.find_by_id(id)
+    id2 = 200
+    invoice2 = sales_engine.invoices.find_by_id(id2)
+    id3 = 203
+    invoice3 = sales_engine.invoices.find_by_id(id3)
+    id4 = 204
+    invoice4 = sales_engine.invoices.find_by_id(id4)
+
+    assert_equal true, invoice.is_paid_in_full?
+    assert_equal true, invoice2.is_paid_in_full?
+    assert_equal false, invoice3.is_paid_in_full?
+    assert_equal false, invoice4.is_paid_in_full?
+  end
 end
