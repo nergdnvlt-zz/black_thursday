@@ -37,4 +37,15 @@ module Calculator
   def find_invoices(customer_id)
     @sales_engine.invoices.find_all_by_customer_id(customer_id)
   end
+
+  def one_time_buyers
+    onesies = []
+    @sales_engine.customers.all.map do |customer|
+      invoices = find_invoices(customer.id)
+      paid_invoices = invoices.find_all(&:is_paid_in_full?)
+      paid_invoices.delete(false)
+      onesies << customer if paid_invoices.length == 1
+    end
+    onesies
+  end
 end
