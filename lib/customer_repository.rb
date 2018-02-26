@@ -39,6 +39,10 @@ class CustomerRepository
     end
   end
 
+  def invoice_access_to_customer_id(id)
+    @engine.invoice_access_to_customer_id(id)
+  end
+
   def inspect
     "#<#{self.class} #{@customers.size} rows>"
   end

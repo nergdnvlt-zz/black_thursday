@@ -190,9 +190,10 @@ class SalesAnalyst
   def one_time_buyers
     onesies = []
     @sales_engine.customers.all.map do |customer|
-      paid_invoices = @sales_engine.invoices.all.find_all(&:is_paid_in_full?)
+      invoices = find_invoices(customer.id)
+      paid_invoices = invoices.find_all(&:is_paid_in_full?)
       paid_invoices.delete(false)
-      onsesies << customer if paid_invoices.length == 1
+      onesies << customer if paid_invoices.length == 1
     end
     onesies
   end

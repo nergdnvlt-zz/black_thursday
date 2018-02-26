@@ -211,21 +211,29 @@ class SalesAnalystTest < Minitest::Test
   #   result = @sa.invoice_status(:returned)
   #   assert_equal 13.5, result
   # end
+  # 
+  # def test_top_buyers
+  #   result = @sa.top_buyers(5)
+  #
+  #   assert_equal 5, result.length
+  #   assert_equal 313, result.first.id
+  #   assert_equal 478, result.last.id
+  #   assert_instance_of Customer, result.first
+  # end
+  #
+  # def test_top_buyers_default
+  #   result = @sa.top_buyers
+  #
+  #   assert_equal 20, result.length
+  #   assert_equal 313, result.first.id
+  #   assert_instance_of Customer, result.first
+  # end
 
-  def test_top_buyers
-    result = @sa.top_buyers(5)
+  def test_one_time_buyers
+    result = @sa.one_time_buyers
 
-    assert_equal 5, result.length
-    assert_equal 313, result.first.id
-    assert_equal 478, result.last.id
-    assert_instance_of Customer, result.first
-  end
-
-  def test_top_buyers_default
-    result = @sa.top_buyers
-
-    assert_equal 20, result.length
-    assert_equal 313, result.first.id
+    assert_equal 150, result.size
+    assert_equal 1, result.first.fully_paid_invoices.length
     assert_instance_of Customer, result.first
   end
 end
