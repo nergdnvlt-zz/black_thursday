@@ -28,8 +28,8 @@ class SalesEngineTest < MiniTest::Test
     assert_equal 1, items.length
   end
 
-  def test_find_by_id
-    result = @se.find_by_id(123_359_71)
+  def test_find_merchant_by_id
+    result = @se.find_merchant(123_359_71)
     assert_instance_of Merchant, result
   end
 
