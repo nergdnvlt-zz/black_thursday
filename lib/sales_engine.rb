@@ -64,4 +64,8 @@ class SalesEngine
   def find_invoice_by_invoice_id(id)
     @invoices.find_by_id(id)
   end
+
+  def invoice_access_to_customer_id(id)
+    @invoices.find_all_by_customer_id(id)
+  end
 end

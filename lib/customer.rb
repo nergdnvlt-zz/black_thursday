@@ -17,4 +17,12 @@ class Customer
     @updated_at = Time.parse(data[:updated_at])
     @customer_repo = parent
   end
+
+  def invoices
+    @customer_repo.invoice_access_to_customer_id(@id)
+  end
+
+  def fully_paid_invoices
+    @customer_repo.invoices.find_all(&:is_paid_in_full?)
+  end
 end
