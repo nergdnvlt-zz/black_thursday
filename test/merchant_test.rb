@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'helper_test'
 
 require_relative '../lib/merchant'
 require_relative '../lib/sales_engine'
@@ -11,18 +10,21 @@ class MerchantTest < MiniTest::Test
               merchants:     './test/fixtures/merchants.csv',
               invoices:      './data/invoices.csv',
               invoice_items: './data/invoice_items.csv',
-              customers:     './data/customers.csv' }
+              customers:     './data/customers.csv',
+              transactions:  './data/transactions.csv' }
   end
 
   def test_it_has_attributes
-    merchant = Merchant.new({id: '5', name: 'Turing School'})
+    data = {id: '5', name: 'Turing School'}
+    merchant = Merchant.new(data)
 
     assert_equal 5, merchant.id
     assert_equal 'Turing School', merchant.name
   end
 
   def test_it_has_different_attributes
-    merchant = Merchant.new({id: '8', name: 'Hogwarts'})
+    data = {id: '8', name: 'Hogwarts'}
+    merchant = Merchant.new(data)
 
     assert_equal 8, merchant.id
     assert_equal 'Hogwarts', merchant.name

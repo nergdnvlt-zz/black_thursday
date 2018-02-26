@@ -1,24 +1,26 @@
 require 'CSV'
+
 require_relative 'transaction'
 
 # Creates an transaction repository to hold item info
 class TransactionRepository
-  attr_reader :engine
+  attr_reader :engine,
+              :transactions
 
   def initialize(filepath, parent = nil)
     @transactions = []
     @engine       = parent
-    populate_item(filepath)
+    populate_transactions(filepath)
+  end
+
+  def populate_transactions(filepath)
+    CSV.foreach(filepath, headers: true, header_converters: :symbol) do |data|
+      @transactions << Transaction.new(data, self)
+    end
   end
 
   def all
     @transactions
-  end
-
-  def populate_item(filepath)
-    CSV.foreach(filepath, headers: true, header_converters: :symbol) do |data|
-      @transactions << Transaction.new(data, self)
-    end
   end
 
   def find_by_id(id)
@@ -26,15 +28,19 @@ class TransactionRepository
   end
 
   def find_all_by_invoice_id(invoice_id)
-    @transactions.find_all { |transaction| transaction.invoice_id == invoice_id }
+    @transactions.find_all do |transaction|
+      transaction.invoice_id == invoice_id
+    end
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    @transactions.find_all { |transaction| transaction.credit_card_number == credit_card_number }
+    @transactions.find_all do |transaction|
+      transaction.credit_card_number == credit_card_number
+    end
   end
 
   def find_all_by_result(result)
-    @transactions.find_all {|transaction| transaction.result == result}
+    @transactions.find_all { |transaction| transaction.result == result }
   end
 
   def inspect

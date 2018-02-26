@@ -1,6 +1,5 @@
-# require_relative 'test_helper'
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'helper_test'
+
 require_relative '../lib/item'
 require_relative '../lib/sales_engine'
 
@@ -63,6 +62,7 @@ class ItemTest < MiniTest::Test
              merchants:     './test/fixtures/merchants.csv',
              invoices:      './data/invoices.csv',
              invoice_items: './data/invoice_items.csv',
+             transactions:  './data/transactions.csv',
              customers:     './data/customers.csv' }
     sales_engine = SalesEngine.new(data)
     id = 263_395_721

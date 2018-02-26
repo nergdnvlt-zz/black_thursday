@@ -1,12 +1,11 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'helper_test'
 
 require_relative '../lib/item_repository'
 
 # Tests the Item Repository
 class ItemRepositoryTest < MiniTest::Test
   def setup
-    @item_repo = ItemRepository.new('./test/fixtures/items.csv')
+    @item_repo = ItemRepository.new('./data/items.csv')
   end
 
   def test_it_exists

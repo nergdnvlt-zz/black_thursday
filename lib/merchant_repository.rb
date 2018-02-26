@@ -1,4 +1,5 @@
 require 'CSV'
+
 require_relative 'merchant'
 require_relative 'sales_engine'
 

@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'helper_test'
+
 require_relative '../lib/invoice'
 require_relative '../lib/sales_engine'
 
@@ -7,13 +7,13 @@ require_relative '../lib/sales_engine'
 class InvoiceTest < MiniTest::Test
   def setup
     @time = Time.now
-    @invoice = Invoice.new({ id: 2,
-                             customer_id: 1,
-                             merchant_id: 123_347_53,
-                             status: 'shipped',
-                             created_at: Time.now.inspect,
-                             updated_at: Time.now.inspect,
-                             })
+    @data = { id: 2,
+              customer_id: 1,
+              merchant_id: 123_347_53,
+              status: 'shipped',
+              created_at: Time.now.inspect,
+              updated_at: Time.now.inspect }
+    @invoice = Invoice.new(@data)
   end
 
   def test_it_has_an_id
@@ -25,7 +25,7 @@ class InvoiceTest < MiniTest::Test
   end
 
   def test_it_has_merchant_id
-    assert_equal 12334753, @invoice.merchant_id
+    assert_equal 123_347_53, @invoice.merchant_id
   end
 
   def test_it_has_a_status
@@ -49,7 +49,8 @@ class InvoiceTest < MiniTest::Test
              merchants:     './data/merchants.csv',
              invoices:      './data/invoices.csv',
              invoice_items: './data/invoice_items.csv',
-             customers:     './data/customers.csv'}
+             customers:     './data/customers.csv',
+             transactions:  './data/transactions.csv' }
     sales_engine = SalesEngine.new(data)
     id = 641
     invoice = sales_engine.invoices.find_by_id(id)
@@ -60,14 +61,12 @@ class InvoiceTest < MiniTest::Test
   end
 
   def test_if_it_returns_all_items_for_an_invoice
-    data = {
-      items:         './data/items.csv',
-      merchants:     './data/merchants.csv',
-      invoices:      './data/invoices.csv',
-      invoice_items: './data/invoice_items.csv',
-      customers:     './data/customers.csv'
-      # transactions:  './data/transactions.csv',
-    }
+    data = { items:         './data/items.csv',
+             merchants:     './data/merchants.csv',
+             invoices:      './data/invoices.csv',
+             invoice_items: './data/invoice_items.csv',
+             customers:     './data/customers.csv',
+             transactions:  './data/transactions.csv' }
     sales_engine = SalesEngine.new(data)
     id = 888
     invoice = sales_engine.invoices.find_by_id(id)

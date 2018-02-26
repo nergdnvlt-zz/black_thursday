@@ -1,4 +1,5 @@
 require 'CSV'
+
 require_relative 'customer'
 
 # Creates a repo to hold all customers and their info

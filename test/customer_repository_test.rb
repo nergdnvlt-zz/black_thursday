@@ -1,4 +1,5 @@
 require 'CSV'
+
 require_relative 'helper_test'
 require_relative '../lib/customer_repository'
 
@@ -47,7 +48,6 @@ class CustomerRepositoryTest < MiniTest::Test
     assert_instance_of Array, result
     assert_equal 2, result.size
   end
-
 
   def test_find_all_by_last_name_returns_empty_for_unfound
     result = @cust_repo.find_all_by_last_name('Erikkson')

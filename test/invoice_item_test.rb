@@ -1,7 +1,8 @@
 require_relative 'helper_test'
-require_relative '../lib/invoice_item'
 require 'bigdecimal'
 require 'time'
+
+require_relative '../lib/invoice_item'
 
 # Tests the info passes correctly in InvoiceItems
 class InvoiceItemTest < Minitest::Test

@@ -1,4 +1,5 @@
 require 'bigdecimal'
+
 require_relative 'calculator'
 
 # This class analyzes all the data from the sales engine.

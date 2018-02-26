@@ -1,6 +1,5 @@
 require 'bigdecimal'
 require 'time'
-require 'pry'
 
 # Holds all the info
 class InvoiceItem

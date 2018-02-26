@@ -1,4 +1,5 @@
 require_relative 'helper_test'
+
 require_relative '../lib/sales_analyst'
 require_relative '../lib/sales_engine'
 
@@ -10,7 +11,8 @@ class SalesAnalystTest < Minitest::Test
       merchants:     './data/merchants.csv',
       invoices:      './data/invoices.csv',
       invoice_items: './data/invoice_items.csv',
-      customers:     './data/customers.csv'
+      customers:     './data/customers.csv',
+      transactions:  './data/transactions.csv'
     )
     @sa = SalesAnalyst.new(@se)
   end

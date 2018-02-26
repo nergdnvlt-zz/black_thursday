@@ -1,4 +1,5 @@
 require 'CSV'
+
 require_relative 'invoice'
 
 # Creates a merchant repository to hold merchant info

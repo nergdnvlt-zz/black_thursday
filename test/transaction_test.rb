@@ -1,20 +1,18 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'helper_test'
+
 require_relative '../lib/transaction'
-require_relative '../lib/sales_engine'
 
 # Tests the transaction class
 class TransactionTest < MiniTest::Test
   def setup
-    @transaction = Transaction.new({
-                    id: 6,
-                    invoice_id: 8,
-                    credit_card_number: "4242424242424242",
-                    credit_card_expiration_date: "0220",
-                    result: "success",
-                    created_at: Time.now.inspect,
-                    updated_at: Time.now.inspect
-                  })
+    @data = { id: 6,
+              invoice_id: 8,
+              credit_card_number: '4242424242424242',
+              credit_card_expiration_date: '0220',
+              result: 'success',
+              created_at: Time.now.inspect,
+              updated_at: Time.now.inspect }
+    @transaction = Transaction.new(@data)
   end
 
   def test_it_has_an_id
@@ -26,15 +24,15 @@ class TransactionTest < MiniTest::Test
   end
 
   def test_it_has_credit_card_number
-    assert_equal "4242424242424242", @transaction.credit_card_number
+    assert_equal 424_242_424_242_424_2, @transaction.credit_card_number
   end
 
   def test_it_has_credit_card_expiration_date
-    assert_equal "0220", @transaction.credit_card_expiration_date
+    assert_equal '0220', @transaction.credit_card_expiration_date
   end
 
   def test_it_has_result
-    assert_equal "success", @transaction.result
+    assert_equal 'success', @transaction.result
   end
 
   def test_it_has_created_at

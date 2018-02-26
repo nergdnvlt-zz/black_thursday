@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'helper_test'
 
 require_relative '../lib/sales_engine'
 
@@ -10,19 +9,13 @@ class SalesEngineTest < MiniTest::Test
               merchants:     './data/merchants.csv',
               invoices:      './data/invoices.csv',
               invoice_items: './data/invoice_items.csv',
+              transactions:  './data/transactions.csv',
               customers:     './data/customers.csv' }
     @se = SalesEngine.from_csv(@data)
   end
 
   def test_it_exists
     assert_instance_of SalesEngine, @se
-  end
-
-  def test_for_from_csv_method
-    assert_equal @data[:items], SalesEngine.from_csv(@data).item_csv
-    assert_equal @data[:merchants], SalesEngine.from_csv(@data).merchant_csv
-    assert_equal @data[:invoices], SalesEngine.from_csv(@data).invoices_csv
-    assert_equal @data[:customers], SalesEngine.from_csv(@data).customers_csv
   end
 
   def test_find_items_by_merchant_id
