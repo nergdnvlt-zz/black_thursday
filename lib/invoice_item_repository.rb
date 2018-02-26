@@ -3,11 +3,12 @@ require_relative 'invoice_item'
 
 # Creates a invoice item repository to hold merchant info
 class InvoiceItemRepository
-  attr_reader :engine
+  attr_reader :engine,
+              :invoice_items
 
   def initialize(filepath, parent = nil)
     @invoice_items = []
-    @engine       = parent
+    @engine        = parent
     populate_invoices_item(filepath)
   end
 
@@ -30,6 +31,12 @@ class InvoiceItemRepository
   end
 
   def find_all_by_invoice_id(invoice_id)
-    @invoice_items.find_all { |invoice_item| invoice_item.invoice_id == invoice_id }
+    @invoice_items.find_all do |invoice_item|
+      invoice_item.invoice_id == invoice_id
+    end
+  end
+
+  def inspect
+    "#<#{self.class} #{@invoice_items.size} rows>"
   end
 end

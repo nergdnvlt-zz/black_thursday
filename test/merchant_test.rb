@@ -7,9 +7,11 @@ require_relative '../lib/sales_engine'
 # Testing merchant class
 class MerchantTest < MiniTest::Test
   def setup
-    @data = { items: './test/fixtures/items.csv',
-              merchants: './test/fixtures/merchants.csv',
-              invoices: './data/invoices.csv' }
+    @data = { items:         './test/fixtures/items.csv',
+              merchants:     './test/fixtures/merchants.csv',
+              invoices:      './data/invoices.csv',
+              invoice_items: './data/invoice_items.csv',
+              customers:     './data/customers.csv' }
   end
 
   def test_it_has_attributes

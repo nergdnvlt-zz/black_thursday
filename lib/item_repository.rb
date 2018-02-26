@@ -11,14 +11,14 @@ class ItemRepository
     populate_item(filepath)
   end
 
-  def all
-    @items
-  end
-
   def populate_item(filepath)
     CSV.foreach(filepath, headers: true, header_converters: :symbol) do |data|
       @items << Item.new(data, self)
     end
+  end
+
+  def all
+    @items
   end
 
   def find_by_id(id)

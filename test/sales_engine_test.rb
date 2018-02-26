@@ -6,9 +6,11 @@ require_relative '../lib/sales_engine'
 # Testing merchant class
 class SalesEngineTest < MiniTest::Test
   def setup
-    @data = { items: './data/items.csv',
-              merchants: './data/merchants.csv',
-              invoices: './data/invoices.csv' }
+    @data = { items:         './data/items.csv',
+              merchants:     './data/merchants.csv',
+              invoices:      './data/invoices.csv',
+              invoice_items: './data/invoice_items.csv',
+              customers:     './data/customers.csv' }
     @se = SalesEngine.from_csv(@data)
   end
 
@@ -20,6 +22,7 @@ class SalesEngineTest < MiniTest::Test
     assert_equal @data[:items], SalesEngine.from_csv(@data).item_csv
     assert_equal @data[:merchants], SalesEngine.from_csv(@data).merchant_csv
     assert_equal @data[:invoices], SalesEngine.from_csv(@data).invoices_csv
+    assert_equal @data[:customers], SalesEngine.from_csv(@data).customers_csv
   end
 
   def test_find_items_by_merchant_id
@@ -27,8 +30,8 @@ class SalesEngineTest < MiniTest::Test
     assert_equal 1, items.length
   end
 
-  def test_find_by_id
-    result = @se.find_by_id(123_359_71)
+  def test_find_merchant_by_id
+    result = @se.find_merchant(123_359_71)
     assert_instance_of Merchant, result
   end
 
