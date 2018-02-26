@@ -104,4 +104,12 @@ class InvoiceTest < MiniTest::Test
     assert_equal false, invoice3.is_paid_in_full?
     assert_equal false, invoice4.is_paid_in_full?
   end
+
+  def test_it_returns_total_dollar_amount_of_the_invoice
+    sales_engine = SalesEngine.new(@csvinfo)
+    id = 1
+    invoice = sales_engine.invoices.find_by_id(id)
+
+    assert_equal 0.2106777e5, invoice.total
+  end
 end

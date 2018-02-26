@@ -46,4 +46,11 @@ class Invoice
     return true if fulfilled
     false
   end
+
+  def total
+    invoice_items = invoice_repo.find_invoice_items_by_invoice_id(id)
+    invoice_items.reduce(0) do |total, invoice_item|
+      total += invoice_item.unit_price * invoice_item.quantity
+    end.round(2)
+  end
 end
