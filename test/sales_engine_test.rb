@@ -9,7 +9,8 @@ class SalesEngineTest < MiniTest::Test
     @data = { items:         './data/items.csv',
               merchants:     './data/merchants.csv',
               invoices:      './data/invoices.csv',
-              invoice_items: './data/invoice_items.csv' }
+              invoice_items: './data/invoice_items.csv',
+              customers:     './data/customers.csv' }
     @se = SalesEngine.from_csv(@data)
   end
 
@@ -21,6 +22,7 @@ class SalesEngineTest < MiniTest::Test
     assert_equal @data[:items], SalesEngine.from_csv(@data).item_csv
     assert_equal @data[:merchants], SalesEngine.from_csv(@data).merchant_csv
     assert_equal @data[:invoices], SalesEngine.from_csv(@data).invoices_csv
+    assert_equal @data[:customers], SalesEngine.from_csv(@data).customers_csv
   end
 
   def test_find_items_by_merchant_id

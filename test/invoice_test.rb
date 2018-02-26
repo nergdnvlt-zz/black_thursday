@@ -48,7 +48,8 @@ class InvoiceTest < MiniTest::Test
     data = { items:         './data/items.csv',
              merchants:     './data/merchants.csv',
              invoices:      './data/invoices.csv',
-             invoice_items: './data/invoice_items.csv'}
+             invoice_items: './data/invoice_items.csv',
+             customers:     './data/customers.csv'}
     sales_engine = SalesEngine.new(data)
     id = 641
     invoice = sales_engine.invoices.find_by_id(id)
@@ -63,9 +64,9 @@ class InvoiceTest < MiniTest::Test
       items:         './data/items.csv',
       merchants:     './data/merchants.csv',
       invoices:      './data/invoices.csv',
-      invoice_items: './data/invoice_items.csv'
+      invoice_items: './data/invoice_items.csv',
+      customers:     './data/customers.csv'
       # transactions:  './data/transactions.csv',
-      # customers:     './data/customers.csv'
     }
     sales_engine = SalesEngine.new(data)
     id = 888
