@@ -30,4 +30,27 @@ class Invoice
       invoice_repo.find_item_by_id(invoice_item.item_id)
     end.compact
   end
+
+  def transactions
+    @invoice_repo.find_transactions_by_invoice_id(id)
+  end
+
+  def customer
+    @invoice_repo.find_customers_by_customer_id(@customer_id)
+  end
+
+  def is_paid_in_full?
+    fulfilled = transactions.find do |transaction|
+      transaction.result == 'success'
+    end
+    return true if fulfilled
+    false
+  end
+
+  def total
+    invoice_items = invoice_repo.find_invoice_items_by_invoice_id(id)
+    invoice_items.reduce(0) do |total, invoice_item|
+      total += invoice_item.unit_price * invoice_item.quantity
+    end.round(2)
+  end
 end

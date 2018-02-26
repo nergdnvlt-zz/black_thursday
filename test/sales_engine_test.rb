@@ -24,7 +24,7 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_find_merchant_by_id
-    result = @se.find_merchant(123_359_71)
+    result = @se.find_merchant_by_merchant_id(123_359_71)
     assert_instance_of Merchant, result
   end
 
