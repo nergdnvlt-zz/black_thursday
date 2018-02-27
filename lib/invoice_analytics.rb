@@ -9,7 +9,7 @@ module InvoiceAnalytics
   end
 
   def total_invoices(merchant_id)
-    @sales_engine.invoices.find_all_by_merchant_id(merchant_id).size
+    @engine.invoices.find_all_by_merchant_id(merchant_id).size
   end
 
   def total_invoices_per_merchant
@@ -100,6 +100,6 @@ module InvoiceAnalytics
   end
 
   def find_all_status(status)
-    @sales_engine.invoices.find_all_by_status(status).count.to_f
+    @engine.invoices.find_all_by_status(status).count.to_f
   end
 end

@@ -244,4 +244,12 @@ class SalesAnalystTest < Minitest::Test
     assert_instance_of Merchant, result
     assert_equal 123_367_53, result.id
   end
+
+  def test_one_time_buyers_item
+    result = @sa.one_time_buyers_top_items
+
+    assert_equal 1, result.length
+    assert_equal [263_518_806], result.map(&:id)
+    assert_instance_of Item, result.first
+  end
 end

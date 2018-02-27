@@ -10,21 +10,21 @@ class SalesAnalyst
 
   attr_reader :days
 
-  def initialize(sales_engine)
-    @sales_engine = sales_engine
+  def initialize(engine)
+    @engine = engine
     @days = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
   end
 
   def merchants
-    @sales_engine.merchants.all
+    @engine.merchants.all
   end
 
   def items
-    @sales_engine.items.all
+    @engine.items.all
   end
 
   def invoices
-    @sales_engine.invoices.all
+    @engine.invoices.all
   end
 
   def average_items_per_merchant
@@ -53,7 +53,7 @@ class SalesAnalyst
   end
 
   def average_item_price_for_merchant(merchant_id)
-    inventory = @sales_engine.merchants.find_by_id(merchant_id).items
+    inventory = @engine.merchants.find_by_id(merchant_id).items
     prices    = inventory.map(&:unit_price)
     (prices.reduce(:+) / inventory.size).round(2)
   end
