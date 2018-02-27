@@ -53,4 +53,11 @@ class Invoice
       total += invoice_item.unit_price * invoice_item.quantity
     end.round(2)
   end
+
+  def quantity_of_invoices
+    invoice_items = invoice_repo.find_invoice_items_by_invoice_id(id)
+    invoice_items.map do |invoice_item|
+      invoice_item.quantity.to_i
+    end.reduce(:+)
+  end
 end

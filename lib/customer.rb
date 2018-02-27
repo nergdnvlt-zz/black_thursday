@@ -23,6 +23,6 @@ class Customer
   end
 
   def fully_paid_invoices
-    @customer_repo.invoices.find_all(&:is_paid_in_full?)
+    invoices.find_all(&:is_paid_in_full?)
   end
 end
