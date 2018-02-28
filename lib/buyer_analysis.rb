@@ -87,12 +87,13 @@ module BuyerAnalysis
   end
 
   def high_volume(invoice_items, quantities)
-    result = quantities.map.with_index do |num, index|
+    items = []
+    quantities.each_with_index do |num, index|
       if num == quantities.max
-        @engine.items.find_by_id(invoice_items[index].item_id)
+        items << @engine.items.find_by_id(invoice_items[index].item_id)
       end
     end
-    result
+    items
   end
 
   def highest_volume_items(customer_id)
