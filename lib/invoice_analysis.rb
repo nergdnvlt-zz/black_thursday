@@ -1,7 +1,7 @@
 require 'bigdecimal'
 
 # This module holds the code to analyze invoices for the sales_analyst
-module InvoiceAnalytics
+module InvoiceAnalysis
   def average_invoices_per_merchant
     num = invoices.size
     div = merchants.size
