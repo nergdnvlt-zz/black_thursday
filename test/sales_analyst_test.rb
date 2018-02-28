@@ -252,4 +252,52 @@ class SalesAnalystTest < Minitest::Test
     assert_equal [263_518_806], result.map(&:id)
     assert_instance_of Item, result.first
   end
+
+  def test_items_bought_in_year_empty
+    result = @sa.items_bought_in_year(400, 2000)
+
+    assert_equal [], result
+    assert_instance_of Array, result
+  end
+
+  def test_items_bought_in_year_actual_return
+    result = @sa.items_bought_in_year(400, 2002)
+
+    assert_instance_of Array, result
+    assert_equal 2, result.size
+    assert_instance_of Item, result.first
+  end
+
+  def test_highest_volume_items
+    result = @sa.highest_volume_items(200)
+
+    assert_equal 6, result.size
+    assert_equal 263_420_195, result.first.id
+    assert_equal 263_448_547, result.last.id
+    assert_instance_of Item, result.first
+  end
+
+  def test_unpaid_invoices
+    result = @sa.customers_with_unpaid_invoices
+
+    assert_equal 786, result.size
+    assert_equal 1, result.first.id
+    assert_equal 999, result.last.id
+    assert_instance_of Customer, result.first
+  end
+
+  def test_best_invoice_by_revenue
+    result = @sa.best_invoice_by_revenue
+
+    assert_equal 339_4, result.id
+    assert_equal 478_77.97, result.total
+    assert_instance_of Invoice, result
+  end
+
+  def test_best_invoice_by_quantity
+    result = @sa.best_invoice_by_quantity
+
+    assert_equal 128_1, result.id
+    assert_instance_of Invoice, result
+  end
 end

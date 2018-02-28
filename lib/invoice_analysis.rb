@@ -1,7 +1,7 @@
 require 'bigdecimal'
 
 # This module holds the code to analyze invoices for the sales_analyst
-module InvoiceAnalytics
+module InvoiceAnalysis
   def average_invoices_per_merchant
     num = invoices.size
     div = merchants.size
@@ -101,5 +101,14 @@ module InvoiceAnalytics
 
   def find_all_status(status)
     @engine.invoices.find_all_by_status(status).count.to_f
+  end
+
+  def customers_with_unpaid_invoices
+    unpaid = []
+    invoices = customers.map(&:invoices)
+    invoices.flatten.each do |invoice|
+      unpaid << invoice.customer unless invoice.is_paid_in_full?
+    end
+    unpaid.uniq
   end
 end
