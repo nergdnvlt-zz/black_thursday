@@ -24,7 +24,7 @@ class Invoice
     @invoice_repo.find_merchant_by_merchant_id(merchant_id)
   end
 
-  def invoice_items
+  def invoice_items(id = 1)
     @invoice_repo.find_invoice_items_by_invoice_id(id)
   end
 

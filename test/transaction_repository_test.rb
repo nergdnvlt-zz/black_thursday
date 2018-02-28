@@ -12,6 +12,11 @@ class TransactionRepositoryTest < MiniTest::Test
     assert_instance_of TransactionRepository, @transaction_repo
   end
 
+  def test_if_transaction_repository_has_customers
+    assert_instance_of Array, @transaction_repo.all
+    assert_instance_of Transaction, @transaction_repo.all.first
+  end
+
   def test_it_can_find_by_id
     result = @transaction_repo.find_by_id(1)
     assert_equal 1, result.id
@@ -24,13 +29,13 @@ class TransactionRepositoryTest < MiniTest::Test
   end
 
   def test_it_can_find_all_by_find_all_by_credit_card_number
-    result = @transaction_repo.find_all_by_credit_card_number(4068631943231473)
+    result = @transaction_repo.find_all_by_credit_card_number(406_863_194_323_147_3)
     assert_instance_of Array, result
     assert_equal 1, result.count
   end
 
   def test_it_can_find_all_by_result
-    result = @transaction_repo.find_all_by_result("success")
+    result = @transaction_repo.find_all_by_result('success')
     assert_instance_of Array, result
     assert_equal 4158, result.count
   end

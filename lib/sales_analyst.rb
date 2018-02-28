@@ -1,10 +1,10 @@
 require 'bigdecimal'
 
-require_relative 'calculator'
-require_relative 'invoice_analysis'
-require_relative 'merchant_analysis'
-require_relative 'buyer_analysis'
-require_relative 'best_invoices'
+require_relative 'calculator_module'
+require_relative 'invoice_analysis_module'
+require_relative 'merchant_analysis_module'
+require_relative 'buyer_analysis_module'
+require_relative 'best_invoices_module'
 
 # This class analyzes all the data from the sales engine.
 class SalesAnalyst

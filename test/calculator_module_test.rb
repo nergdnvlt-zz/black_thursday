@@ -1,5 +1,5 @@
 require_relative 'helper_test'
-require_relative '../lib/calculator'
+require_relative '../lib/calculator_module'
 
 # Tests accuracy of standard deviation calculations
 class CalculatorTest < Minitest::Test
