@@ -304,6 +304,6 @@ class SalesAnalystTest < Minitest::Test
   def test_invoice_items
     result = @sa.best_invoice_by_quantity
     high_qty = result.invoice_items.map(&:quantity).reduce(:+)
-    assert_equal 47, high_qty
+    assert_equal 64, high_qty
   end
 end
