@@ -252,4 +252,19 @@ class SalesAnalystTest < Minitest::Test
     assert_equal [263_518_806], result.map(&:id)
     assert_instance_of Item, result.first
   end
+
+  def test_items_bought_in_year_empty
+    result = @sa.items_bought_in_year(400, 2000)
+
+    assert_equal [], result
+    assert_instance_of Array, result
+  end
+
+  def test_items_bought_in_year_actual_return
+    result = @sa.items_bought_in_year(400, 2002)
+
+    assert_instance_of Array, result
+    assert_equal 2, result.size
+    assert_instance_of Item, result.first
+  end
 end

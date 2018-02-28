@@ -84,4 +84,21 @@ module Calculator
     end
     high[0].merchant
   end
+
+  def invoice_to_year(customer_id, year)
+    customer = @engine.customers.find_by_id(customer_id)
+    invoices = customer.invoices.find_all do |invoice|
+      invoice.created_at.to_s[0..3].to_i == year
+    end
+    invoices
+  end
+
+  def items_bought_in_year(customer_id, year)
+    invoices = invoice_to_year(customer_id, year)
+    invoices.map do |invoice|
+      invoice.items.map do |item|
+        item
+      end
+    end.flatten
+  end
 end
