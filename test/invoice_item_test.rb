@@ -11,7 +11,7 @@ class InvoiceItemTest < Minitest::Test
               item_id:      66,
               invoice_id:   46,
               quantity:     10,
-              unit_price:   BigDecimal.new(10.994, 4),
+              unit_price:   BigDecimal.new(1099, 4),
               created_at:   Time.now.inspect,
               updated_at:   Time.now.inspect }
     @invoice_item = InvoiceItem.new(@info)
@@ -27,9 +27,9 @@ class InvoiceItemTest < Minitest::Test
     assert_equal @info[:invoice_id], @invoice_item.invoice_id
   end
 
-  def test_quantituy_and_price_attributes
+  def test_quantity_and_price_attributes
     assert_equal @info[:quantity], @invoice_item.quantity
-    assert_equal 0.1099e0, @invoice_item.unit_price
+    assert_equal 0.1099e2, @invoice_item.unit_price
   end
 
   def test_time_attributes
@@ -38,6 +38,6 @@ class InvoiceItemTest < Minitest::Test
   end
 
   def test_if_it_can_return_unit_price_in_dollars
-    assert_equal '$0.11', @invoice_item.unit_price_to_dollars
+    assert_equal 10.99, @invoice_item.unit_price_to_dollars
   end
 end

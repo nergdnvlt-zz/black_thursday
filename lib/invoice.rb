@@ -24,6 +24,10 @@ class Invoice
     @invoice_repo.find_merchant_by_merchant_id(merchant_id)
   end
 
+  def invoice_items
+    @invoice_repo.find_invoice_items_by_invoice_id(id)
+  end
+
   def items
     invoice_items = @invoice_repo.find_invoice_items_by_invoice_id(id)
     invoice_items.map do |invoice_item|
@@ -48,9 +52,9 @@ class Invoice
   end
 
   def total
-    invoice_items = invoice_repo.find_invoice_items_by_invoice_id(id)
+    invoice_items = @invoice_repo.find_invoice_items_by_invoice_id(id)
     invoice_items.reduce(0) do |total, invoice_item|
-      total += invoice_item.unit_price * invoice_item.quantity
+      total + invoice_item.unit_price * invoice_item.quantity
     end.round(2)
   end
 

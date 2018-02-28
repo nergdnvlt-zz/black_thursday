@@ -4,6 +4,7 @@ require_relative 'calculator'
 require_relative 'invoice_analysis'
 require_relative 'merchant_analysis'
 require_relative 'buyer_analysis'
+require_relative 'best_invoices'
 
 # This class analyzes all the data from the sales engine.
 class SalesAnalyst
@@ -11,6 +12,7 @@ class SalesAnalyst
   include InvoiceAnalysis
   include MerchantAnalysis
   include BuyerAnalysis
+  include BestInvoices
 
   attr_reader :days
 
@@ -29,6 +31,10 @@ class SalesAnalyst
 
   def invoices
     @engine.invoices.all
+  end
+
+  def customers
+    @engine.customers.all
   end
 
   def average_item_price

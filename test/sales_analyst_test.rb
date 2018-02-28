@@ -285,4 +285,19 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 999, result.last.id
     assert_instance_of Customer, result.first
   end
+
+  def test_best_invoice_by_revenue
+    result = @sa.best_invoice_by_revenue
+
+    assert_equal 339_4, result.id
+    assert_equal 478_77.97, result.total
+    assert_instance_of Invoice, result
+  end
+
+  def test_best_invoice_by_quantity
+    result = @sa.best_invoice_by_quantity
+
+    assert_equal 128_1, result.id
+    assert_instance_of Invoice, result
+  end
 end
