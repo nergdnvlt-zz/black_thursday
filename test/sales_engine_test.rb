@@ -28,6 +28,12 @@ class SalesEngineTest < MiniTest::Test
     assert_instance_of Merchant, result
   end
 
+  def test_find_invoice
+    result = @se.find_invoice(10)
+    assert_instance_of Invoice, result
+    assert_equal 10, result.id
+  end
+
   def test_find_invoices_by_merchant_id
     result = @se.find_invoices_by_merchant_id(123_359_71)
     assert_instance_of Array, result
